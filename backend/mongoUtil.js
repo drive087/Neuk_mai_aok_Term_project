@@ -25,5 +25,4 @@ connection = (callback) => {
 }
 
 module.exports.connectToServer = connection
-module.exports.getDoctorDb = ()=>{return doctor_database}
-module.exports.getPatientDb = ()=>{return patient_database}
+module.exports.getUserDb = ()=>{return user_database}

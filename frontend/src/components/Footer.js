@@ -3,7 +3,7 @@ import React from 'react';
 import facebookIcon from '../pic/socialIcon/facebookIcon.png';
 import lineIcon from '../pic/socialIcon/lineIcon.png';
 import youtubeIcon from '../pic/socialIcon/youtubeIcon.png';
-import './Footer.css';
+import '../pages/style.css';
 
 function Footer(props) {
     
@@ -21,12 +21,12 @@ function Footer(props) {
                     </Grid>
                 </Grid>
                 <Grid id="FooterGrid2" item xs={12} sm={12} md={6}>
-                    <Grid item>
+                    {/* <Grid item>
                         <h1 id='white'>Contact Us</h1>
-                        <img className='iconSocF' src={facebookIcon} style={{paddingLeft:'10px'}}/>
-                        <img className='iconSocF' src={lineIcon} style={{paddingLeft:'10px'}}/>
-                        <img className='iconSocF' src={youtubeIcon} style={{paddingLeft:'10px'}} />
-                    </Grid>
+                        <img className='iconSocF' src={facebookIcon} />
+                        <img className='iconSocF' src={lineIcon} />
+                        <img className='iconSocF' src={youtubeIcon} />
+                    </Grid> */}
                     <Grid item id='white'>
                         <h2>Address: </h2>
                         <p>254 Phayathai Rd., Wang Mai, Pathum Wan District, Bangkok 10330<br/>Call : 080-778-890</p>

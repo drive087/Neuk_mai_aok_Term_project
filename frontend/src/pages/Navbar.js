@@ -100,11 +100,6 @@ export default function PersistentDrawerLeft(props) {
     setOpen(false);
   };
 
-  function onLogout(){
-    localStorage.setItem('token', null);
-    window.location.reload();
-  }
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -117,9 +112,9 @@ export default function PersistentDrawerLeft(props) {
         <Toolbar className={classes.toolbarStyle}>
         <Button id='NavBarLogo' style={{maxWidth: '140px', maxHeight: '50px', minWidth: '140px', minHeight: '50px',backgroundColor:'#2a3649'}} disableElevation variant='contained' color='primary' href='/' >CU PART-TIME</Button>
         <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <Button id='logoutBtn' variant='outlined' color='inherit' onClick={()=>onLogout()}>logout</Button>
+            <Button href='/register' id='registerBtn' variant='outlined' color='inherit'>Register</Button>
+            <Button href='/login' id='loginBtn' variant='outlined' color='inherit' id='loginBut'>Login</Button>
         </div>
-        
         </Toolbar>
       </AppBar>
       <Drawer

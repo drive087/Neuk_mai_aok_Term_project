@@ -5,15 +5,20 @@ import {
   Redirect,
 } from 'react-router-dom'
 
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+import Navbar from './pages/Navbar'
+import NavbarWithUser from './pages/NavbarWithUser'
 
 function App() {
+  if(localStorage.getItem('token') == 'null'){
+    return (
+      <Router>
+      <Route path="/" component={Navbar}/>
+      </Router>
+    );
+  }
   return (
     <Router>
-    <Route path="/" render={props => <Redirect to="/login"/>}/>
-    <Route path="/login" component={Login}/>
-    <Route path="/dashboard" component={Dashboard}/>
+    <Route path="/" component={NavbarWithUser}/>
     </Router>
   );
 }

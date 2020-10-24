@@ -1,57 +1,41 @@
-const dotenv = require('dotenv');
-const MongoClient = require('mongodb').MongoClient;
+const express = require('express')
+const mongoUtil = require('./mongoUtil')
+const session = require('express-session')
+const cors = require('cors');
+const LocalStrategy = require('passport-local').Strategy;
 
-// ENV configuration
-dotenv.config({
-    path: './config.env'
-});
-const app = require('./app');
+console.log("Start server")
 
-// Connect to the database and open server on port...
-const uri = process.env.DATABASE.replace(
-    '<PASSWORD>',
-    process.env.DATABASE_PASSWORD
-);
+mongoUtil.connectToServer( function( err, client ) {
+  if (err) console.log(err);
+  const passport = require('./passport').pp()
+  const userRouter = require('./routes/users')
+  const app = express()
+  
+  app.use(cors({
+      origin:['http://localhost:3000'],
+      credentials:true
+  }));
+  
+  app.use(express.json())
+  app.all('*', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+  app.use(session({
+    secret: 'qve~UV20_0',
+    resave: false,
+    saveUninitialized: false
+  }));
 
+  // passport middleware setup ( it is mandatory to put it after session middleware setup)
+  app.use(passport.initialize());
+  app.use(passport.session());
 
-const mongoOptions = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}
-
-let server
-const port = process.env.PORT || 9000;
-
-const connectDB = async (uri) => {
-    try {
-        await MongoClient.connect(uri, mongoOptions, (err, db) => {
-            console.log(uri)
-            if (err) {
-                console.log(`Failed to connect to the database. ${err.stack}`);
-            } else {
-                app.locals.db = db;
-                console.log('DB connection successful!');
-            };
-        });
-    } catch (err) {
-        throw new Error(err.message);
-    }
-
-
-    // const client = new MongoClient(uri, { useNewUrlParser: true });
-    // client.connect(err => {
-    //     // const collection = client.db("test").collection("devices");
-    //     // perform actions on the collection object
-    //     console.log('DB connection successful!');
-    //     app.locals.db = client.db("User")
-    //     console.log(app.locals.db);
-    //     client.close();
-    //   });
-
-}
-
-connectDB(uri).then(() => {
-    server = app.listen(port, () => {
-        console.log(`App running on port ${port}...`);
-    });
-});
+//   app.use('/', doctorRouter)
+  app.use('/user', userRouter)
+  app.listen(8080, () => console.log('server started'))
+} );
