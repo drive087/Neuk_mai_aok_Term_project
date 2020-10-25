@@ -10,12 +10,18 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import Footer from '../components/Footer';
 import Login from '../pages/Login'
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import FirstLanding from './FirstLanding';
 import Register from './Register';
+import Dashboard from './Dashboard';
+import CreateJob from './CreateJob';
+import Schedule from './Schedule';
 
 const drawerWidth = 240;
 
@@ -102,6 +108,10 @@ export default function PersistentDrawerLeft(props) {
 
   function onLogout(){
     localStorage.setItem('token', null);
+    props.history.push({
+      pathname:'/',
+      state: { username: null,_id: null}
+    });
     window.location.reload();
   }
 
@@ -115,6 +125,15 @@ export default function PersistentDrawerLeft(props) {
         })}
       >
         <Toolbar className={classes.toolbarStyle}>
+        <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
+                        className={clsx(classes.menuButton, open && classes.hide)}
+                    >
+                        <MenuIcon />
+                    </IconButton>  
         <Button id='NavBarLogo' style={{maxWidth: '140px', maxHeight: '50px', minWidth: '140px', minHeight: '50px',backgroundColor:'#2a3649'}} disableElevation variant='contained' color='primary' href='/' >CU PART-TIME</Button>
         <div style={{ display: 'flex', flexDirection: 'row' }}>
             <Button id='logoutBtn' variant='outlined' color='inherit' onClick={()=>onLogout()}>logout</Button>
@@ -137,14 +156,19 @@ export default function PersistentDrawerLeft(props) {
           </IconButton>
         </div>
         <Divider />
+          <List>
+            <ListItem><ListItemText><Button href='/Dashboard'>Home</Button></ListItemText></ListItem>
+            <ListItem><ListItemText><Button href='/CreateJob'>CreateJob</Button></ListItemText></ListItem>      
+            <ListItem><ListItemText><Button href='/Schedule'>My Schedule</Button></ListItemText></ListItem>
+          </List>
         <Divider />
       </Drawer>
 
       <Router>
         <div >
-          <Route exact path="/" component={FirstLanding} />
-          <Route path="/login" component={Login} />
-          <Route path="/Register" component={Register} />
+          <Route exact path="/Dashboard" component={Dashboard} />
+          <Route exact path="/CreateJob" component={CreateJob} />
+          <Route exact path="/Schedule" component={Schedule} />
         </div>
       </Router>
       <Footer id='Footer' />

@@ -39,7 +39,12 @@ function Login(props) {
     .then(res=>{
       if(res.status === 200){
         console.log('success')
+        console.log(res.data)
         localStorage.setItem('token', res.data.user.token)
+        history.push({
+          pathname:'/Dashboard',
+          state: { username: res.data.user.username,_id: res.data.user._id}
+        });
         window.location.reload();
       }
     }).catch(err=>{

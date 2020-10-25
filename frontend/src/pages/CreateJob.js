@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 
-function Dashboard(props) {
+function CreateJob(props) {
   const [jobs, setJobs] = useState(null);
   
 
@@ -19,9 +19,9 @@ function Dashboard(props) {
  
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1>CreateJob</h1>
     </div>
   );
 }
 
-export default withRouter(Dashboard);
+export default withRouter(CreateJob);
