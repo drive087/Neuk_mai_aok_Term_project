@@ -10,6 +10,9 @@ let auth = require('../auth')
 
 const router = express.Router()
 
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
+
 router.get('/', (req, res) => {
     res.send('Hello World')
 })
@@ -27,16 +30,18 @@ router.post('/register', (req, res, next) => {
             })
         }
         else{
-            userDb.collection('UserPersonal').insertOne({
+            bcrypt.hash(user.password, saltRounds, function(err, hash) {
+              // Store hash in your password DB.
+              userDb.collection('UserPersonal').insertOne({
                 email: user.email,
-                password: user.password,
+                password: hash,
                 first_name: user.firstName,
                 last_name: user.lastName,
                 gender: user.gender,
                 birthday: user.birthday
             })
-        
-            console.log('create new user success!!')
+            });
+            console.log('create new user success!! >> ' + user.email)
         
             return res.status(200).json({
                 sucess:'create success'
