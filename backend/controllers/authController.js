@@ -31,6 +31,9 @@ exports.login = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
+  User.find({}).then((user) => {
+    console.log(user)
+  })
   // Find user by email
   User.findOne({ email }).then((user) => {
     // Check if user exists
@@ -46,7 +49,6 @@ exports.login = async (req, res, next) => {
         const payload = {
           _id: user._id,
           username: user.email,
-          token: token,
         };
         // Sign token
         jwt.sign(
@@ -58,9 +60,11 @@ exports.login = async (req, res, next) => {
           },
           (err, token) => {
             res.json({
-              success: true,
-              token: "Bearer " + token,
-            });
+              "user": {
+                "_id": user._id,
+                "username": user.email,
+                "token": "Bearer " + token,
+            }});
           }
         );
       } else {
