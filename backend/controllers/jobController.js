@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const Job = require("../models/jobModel");
 
 exports.getAll = async (req, res, next) => {
-  console.log("asdasdas");
   Job.find()
     .then((jobs) => {
       res.json(jobs);
@@ -13,10 +12,12 @@ exports.getAll = async (req, res, next) => {
 
 exports.newJob = async (req, res) => {
   const job = req.body;
+//   const userInfo = req.userInfo
 
   const newJob = new Job({
     JobName: job.JobName,
     JobDetail: job.JobDetail,
+    JobOwner: req.userInfo.username,
     Wages: job.Wages,
     Amount: job.Amount,
     Location: job.Location,

@@ -12,6 +12,10 @@ const JobSchema = new Schema({
     type: String,
     required: true,
   },
+  JobOwner: {
+    type: String,
+    required: true,
+  },
   Wages: {
     type: Number,
     required: true,
