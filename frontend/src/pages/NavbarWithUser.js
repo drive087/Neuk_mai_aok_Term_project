@@ -22,6 +22,7 @@ import Register from './Register';
 import Dashboard from './Dashboard';
 import CreateJob from './CreateJob';
 import Schedule from './Schedule';
+import JobManagementPage from './JobManagementPage'
 
 const drawerWidth = 240;
 
@@ -161,6 +162,7 @@ export default function PersistentDrawerLeft(props) {
             <ListItem><ListItemText><Button href='/'>Home</Button></ListItemText></ListItem>
             <ListItem><ListItemText><Button href='/CreateJob'>CreateJob</Button></ListItemText></ListItem>      
             <ListItem><ListItemText><Button href='/Schedule'>My Schedule</Button></ListItemText></ListItem>
+            <ListItem><ListItemText><Button href='/jobmanagement'>Job Management</Button></ListItemText></ListItem>
           </List>
         <Divider />
       </Drawer>
@@ -170,6 +172,7 @@ export default function PersistentDrawerLeft(props) {
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/CreateJob" component={CreateJob} />
           <Route exact path="/Schedule" component={Schedule} />
+          <Route exact path="/jobmanagement" component={JobManagementPage} />
         </div>
       </Router>
       <Footer id='Footer' />
