@@ -10,7 +10,7 @@ import {
   Container,
 } from "@material-ui/core";
 import axios from "axios";
-import JobCard from "../components/JobCard"
+import JobCard from "../components/JobCard";
 
 const jobs = [
   {
@@ -50,18 +50,16 @@ const jobs = [
 ];
 
 const JobManagementPage = () => {
-
   useEffect(() => {});
 
   return (
-    <div>
-      <Container>
-        <h1>ddd</h1>
-        {jobs.map((job) => (
-          <JobCard/>
-        ))}
-      </Container>
-    </div>
+    <Container>
+      <h1>ddd</h1>
+      <Typography variant="h3">Job Management</Typography>
+      {jobs.map((job) => (
+        <JobCard job={job} />
+      ))}
+    </Container>
   );
 };
 

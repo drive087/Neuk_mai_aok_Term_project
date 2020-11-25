@@ -7,13 +7,16 @@ import {
   Button,
   Typography,
   makeStyles,
+  Grid,
   Container,
+  CardHeader,
 } from "@material-ui/core";
 import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    margin: 15,
   },
   bullet: {
     display: "inline-block",
@@ -28,35 +31,90 @@ const useStyles = makeStyles({
   },
 });
 
-const JobCard = () => {
+const JobCard = ({ job }) => {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <Card className={classes.root}>
+      <CardHeader
+        title={`Status ${job.Status}`}
+        subheader={
+          <Button variant="contained" color="primary">
+            Edit
+          </Button>
+        }
+      />
       <CardContent>
-        <Typography
-          className={classes.title}
-          color="textSecondary"
-          gutterBottom
-        >
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="h2">
-          be{bull}nev{bull}o{bull}lent
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          adjective
-        </Typography>
-        <Typography variant="body2" component="p">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
+        <Grid container>
+          <Grid item xs={3}>
+            <Typography variant="h5" component="h2">
+              JobName
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              {job.JobName}
+            </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h5" component="h2">
+              JobDetail
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              {job.JobName}
+            </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h5" component="h2">
+              Wages
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              {job.JobName}
+            </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h5" component="h2">
+              Amount
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              {job.JobName}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid container>
+          <Grid item xs={3}>
+            <Typography variant="h5" component="h2">
+              Location
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              {job.JobName}
+            </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h5" component="h2">
+              BeginTime
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              {job.JobName}
+            </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h5" component="h2">
+              EndTime
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              {job.JobName}
+            </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h5" component="h2">
+              Date
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              {job.JobName}
+            </Typography>
+          </Grid>
+        </Grid>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 };
