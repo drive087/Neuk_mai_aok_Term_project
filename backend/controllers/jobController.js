@@ -25,7 +25,7 @@ exports.newJob = async (req, res) => {
     Date: job.Date,
     CurrentEmployee: job.CurrentEmployee,
     CurrentAcceptedEmployee: job.CurrentAcceptedEmployee,
-    Status: 'Ready',
+    Status: "Ready",
     Employer: job.Employer,
   });
   newJob
@@ -34,7 +34,24 @@ exports.newJob = async (req, res) => {
     .catch((err) => console.log(err));
 };
 
-exports.apply  = async (req, res) => {
-    
-}
+exports.apply = async (req, res) => {
+  const data = req.body;
 
+//   var o_id = new mongo.ObjectID(data._id);
+  Job.findOneAndUpdate(
+    {
+      _id: data._id,
+    },
+    {
+      $push: {
+        CurrentEmployee: data.employee,
+      },
+    }
+  )
+  .then((job) => res.status(200).json("Ok"))
+  .catch((err) => console.log(err));
+
+//   return res.status(200).json({
+//     sucess: "create success",
+//   });
+};
