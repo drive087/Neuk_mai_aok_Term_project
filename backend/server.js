@@ -5,12 +5,13 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const LocalStrategy = require("passport-local").Strategy;
 const dotenv = require('dotenv');
+const passport = require("passport");
 
 console.log("Start server");
 
-const passport = require("./passport").pp();
+// const passport = require("./passport").pp();
 const userRouter = require("./routes/testuserRoutes");
-const jobRouter = require("./routes/jobs");
+const jobRouter = require("./routes/testjobsRoutes");
 const app = express();
 
 // DB Config
@@ -59,11 +60,25 @@ app.use(
 
 // passport middleware setup ( it is mandatory to put it after session middleware setup)
 app.use(passport.initialize());
-app.use(passport.session());
+require("./config/passport")(passport);
+// app.use(passport.session());
+
+app.use(async (req) => {
+  try {
+    // const token = req.headers.authorization
+    const userInfo = jwt_decode(req.headers.authorization);
+    // console.log(userInfo);
+    req.userInfo = userInfo;
+    return req.next();
+  } catch (e) {
+    return req.next();
+  }
+});
 
 //   app.use('/', doctorRouter)
 app.use("/user", userRouter);
-app.use("/jobs", jobRouter);
+// app.use("/jobs", jobRouter);
+app.use("/jobs", passport.authenticate("jwt", { session: false }), jobRouter);
 app.use("/", (req, res, next) => {
   res.send("Hello WOrld");
 });
