@@ -17,7 +17,7 @@ function Login(props) {
     console.log(localStorage.getItem('token'))
     if (localStorage.getItem('token') != "null"){
       console.log('sucess1')
-      axios.get('http://localhost:8080/user/login',
+      axios.get('/user/login',
       {
         headers: { Authorization: `Token ${localStorage.getItem('token')}` }
       })
@@ -32,7 +32,7 @@ function Login(props) {
   function login(email,password,history){
     console.log(email)
     console.log(password)
-    axios.post('http://localhost:8080/user/login',{
+    axios.post('/user/login',{
       email: email,
       password: password
     })
@@ -41,10 +41,12 @@ function Login(props) {
         console.log('success')
         console.log(res.data)
         localStorage.setItem('token', res.data.user.token)
+        localStorage.setItem('username', res.data.user.username)
         history.push({
-          pathname:'/Dashboard',
+          pathname:'/',
           state: { username: res.data.user.username,_id: res.data.user._id}
         });
+        
         window.location.reload();
       }
     }).catch(err=>{

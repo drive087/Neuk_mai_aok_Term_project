@@ -9,6 +9,7 @@ dotenv.config({
 });
 
 var user_database
+var job_database
 
 connection = (callback) => {
   const uri = process.env.DATABASE.replace(
@@ -20,9 +21,11 @@ connection = (callback) => {
       console.log("Successful connect to database")
       // perform actions on the collection object
       user_database = client.db('User')
+      job_database = client.db('Job')
       return callback(err)
   })     
 }
 
 module.exports.connectToServer = connection
 module.exports.getUserDb = ()=>{return user_database}
+module.exports.getJobDb = ()=>{return job_database}

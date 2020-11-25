@@ -1,25 +1,16 @@
 import React , { useState, useEffect, Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import JobsForm from '../components/JobsForm';
 
 
 function Dashboard(props) {
-  const [jobs, setJobs] = useState(null);
-  
-
-  useEffect(() => {
-    
-  },[])
-
-  function login(email,password,history){
-    
-  }
-
-
  
   return (
     <div>
       <h1>Dashboard</h1>
+      <h1>Dashboard</h1>
+      <JobsForm/>
     </div>
   );
 }

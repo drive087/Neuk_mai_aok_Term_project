@@ -108,6 +108,7 @@ export default function PersistentDrawerLeft(props) {
 
   function onLogout(){
     localStorage.setItem('token', null);
+    localStorage.setItem('username', null);
     props.history.push({
       pathname:'/',
       state: { username: null,_id: null}
@@ -157,7 +158,7 @@ export default function PersistentDrawerLeft(props) {
         </div>
         <Divider />
           <List>
-            <ListItem><ListItemText><Button href='/Dashboard'>Home</Button></ListItemText></ListItem>
+            <ListItem><ListItemText><Button href='/'>Home</Button></ListItemText></ListItem>
             <ListItem><ListItemText><Button href='/CreateJob'>CreateJob</Button></ListItemText></ListItem>      
             <ListItem><ListItemText><Button href='/Schedule'>My Schedule</Button></ListItemText></ListItem>
           </List>
@@ -166,7 +167,7 @@ export default function PersistentDrawerLeft(props) {
 
       <Router>
         <div >
-          <Route exact path="/Dashboard" component={Dashboard} />
+          <Route exact path="/" component={Dashboard} />
           <Route exact path="/CreateJob" component={CreateJob} />
           <Route exact path="/Schedule" component={Schedule} />
         </div>

@@ -10,6 +10,7 @@ mongoUtil.connectToServer( function( err, client ) {
   if (err) console.log(err);
   const passport = require('./passport').pp()
   const userRouter = require('./routes/users')
+  const jobRouter = require('./routes/jobs')
   const app = express()
   
   app.use(cors({
@@ -37,5 +38,9 @@ mongoUtil.connectToServer( function( err, client ) {
 
 //   app.use('/', doctorRouter)
   app.use('/user', userRouter)
-  app.listen(8080, () => console.log('server started'))
+  app.use('/jobs', jobRouter)
+  app.use('/', (req,res,next) => {
+    res.send('Hello WOrld')
+  })
+  app.listen(8000, () => console.log('server started'))
 } );
