@@ -69,6 +69,7 @@ app.use(async (req) => {
     // const token = req.headers.authorization
     const userInfo = jwt_decode(req.headers.authorization);
     // console.log(userInfo);
+
     req.userInfo = userInfo;
     console.log(req.userInfo)
     return req.next();

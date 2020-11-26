@@ -18,6 +18,10 @@ exports.signup =  async (req, res, next) => {
         last_name: req.body.last_name,
         gender: req.body.gender,
         birthday: req.body.birthday,
+        pending: [],
+        inprogress: [],
+        cancel: [],
+        approve: [],
       });
       // Hash password before saving in database
       bcrypt.genSalt(10, (err, salt) => {

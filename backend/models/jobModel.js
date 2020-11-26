@@ -36,17 +36,63 @@ const JobSchema = new Schema({
     type: String,
     required: true,
   },
-  Date: {
-    type: String,
-    required: true,
-  },
-  CurrentEmployee: [],
-  CurrentAcceptedEmployee: [],
+  CurrentEmployee: [
+    {
+      userId: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+      first_name: {
+        type: String,
+        required: true,
+      },
+      last_name: {
+        type: String,
+        required: true,
+      },
+      gender: {
+        type: String,
+        required: true,
+      },
+      birthday: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  CurrentAcceptedEmployee: [
+    {
+      userId: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+      first_name: {
+        type: String,
+        required: true,
+      },
+      last_name: {
+        type: String,
+        required: true,
+      },
+      gender: {
+        type: String,
+        required: true,
+      },
+      birthday: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   Status: {
-    type: String,
-    required: true,
-  },
-  Employer: {
     type: String,
     required: true,
   },
