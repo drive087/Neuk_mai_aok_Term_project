@@ -23,11 +23,9 @@ exports.newJob = async (req, res) => {
     Location: job.Location,
     BeginTime: job.BeginTime,
     EndTime: job.EndTime,
-    Date: job.Date,
     CurrentEmployee: job.CurrentEmployee,
     CurrentAcceptedEmployee: job.CurrentAcceptedEmployee,
     Status: "Ready",
-    Employer: job.Employer,
   });
   newJob
     .save()

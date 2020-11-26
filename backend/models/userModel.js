@@ -25,9 +25,168 @@ const UserSchema = new Schema({
   },
   birthday: {
     type: String,
-    required: false
+    required: false,
   },
+  pending: [
+    {
+      JobId: {
+        type: String,
+        required: true,
+      },
+      JobName: {
+        type: String,
+        required: true,
+      },
+      JobDetail: {
+        type: String,
+        required: true,
+      },
+      JobOwner: {
+        type: String,
+        required: true,
+      },
+      Wages: {
+        type: Number,
+        required: true,
+      },
+      Amount: {
+        type: Number,
+        required: true,
+      },
+      Location: {
+        type: String,
+        required: true,
+      },
+      BeginTime: {
+        type: String,
+        required: true,
+      },
+      EndTime: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  inprogress: [
+    {
+      JobId: {
+        type: String,
+        required: true,
+      },
+      JobName: {
+        type: String,
+        required: true,
+      },
+      JobDetail: {
+        type: String,
+        required: true,
+      },
+      JobOwner: {
+        type: String,
+        required: true,
+      },
+      Wages: {
+        type: Number,
+        required: true,
+      },
+      Amount: {
+        type: Number,
+        required: true,
+      },
+      Location: {
+        type: String,
+        required: true,
+      },
+      BeginTime: {
+        type: String,
+        required: true,
+      },
+      EndTime: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  cancel: [
+    {
+      JobId: {
+        type: String,
+        required: true,
+      },
+      JobName: {
+        type: String,
+        required: true,
+      },
+      JobDetail: {
+        type: String,
+        required: true,
+      },
+      JobOwner: {
+        type: String,
+        required: true,
+      },
+      Wages: {
+        type: Number,
+        required: true,
+      },
+      Amount: {
+        type: Number,
+        required: true,
+      },
+      Location: {
+        type: String,
+        required: true,
+      },
+      BeginTime: {
+        type: String,
+        required: true,
+      },
+      EndTime: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  approve: [
+    {
+      JobId: {
+        type: String,
+        required: true,
+      },
+      JobName: {
+        type: String,
+        required: true,
+      },
+      JobDetail: {
+        type: String,
+        required: true,
+      },
+      JobOwner: {
+        type: String,
+        required: true,
+      },
+      Wages: {
+        type: Number,
+        required: true,
+      },
+      Amount: {
+        type: Number,
+        required: true,
+      },
+      Location: {
+        type: String,
+        required: true,
+      },
+      BeginTime: {
+        type: String,
+        required: true,
+      },
+      EndTime: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 module.exports = User = mongoose.model("Users", UserSchema, "Users");
-
