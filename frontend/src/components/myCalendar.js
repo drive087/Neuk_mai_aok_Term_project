@@ -32,7 +32,7 @@ const eventStyleGetter = (event, start, end, isSelected) => {
   var backgroundColor = event.hexColor;
   var style = {
     backgroundColor: backgroundColor,
-    borderRadius: "0px",
+    borderRadius: "7px",
     opacity: 0.8,
     color: "black",
     border: "0px",
@@ -45,16 +45,16 @@ const eventStyleGetter = (event, start, end, isSelected) => {
 };
 
 const localizer = momentLocalizer(moment);
-
 const MyCalendar = ({ jobs }) => {
   const [events, setEvent] = useState([]);
 
   const mapEvent = () => {
-    jobs.map((EachJob)=> {
+    jobs.map((EachJob,index)=> {
       const detail = {
-        "title" : EachJob.JobName,
-        "start" : EachJob.BeginTime,
-        "end" : EachJob.EndTime,
+        title : EachJob.JobName,
+        start : EachJob.BeginTime,
+        end : EachJob.EndTime,
+        hexColor: getRandomColor(index)
       }
       events.push(detail)
     })
@@ -75,10 +75,8 @@ const MyCalendar = ({ jobs }) => {
         startAccessor="start"
         endAccessor="end"
         style={{ height: 500, width: 900 }}
+        eventPropGetter={eventStyleGetter}
       />
-      <button onClick={() => console.log(events)}>
-        TESTtdrlkfmytdrtyuilohiuyftdT
-      </button>
     </div>
   );
 };

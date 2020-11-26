@@ -55,15 +55,36 @@ export const createJob = (job) => {
   return api;
 };
 
-// axios
-// .post("/jobs/create", data, {
-//   headers: { Authorization: `${localStorage.getItem("token")}` },
-// })
-// .then((res) => {
-//   if (res.status === 200) {
-//     props.history.push({
-//       pathname: "/",
-//     });
-//     window.location.reload();
-//   }
-// });
+// GetMyJob
+export const getmyJobs = () => {
+  const api = axios
+    .get(`${API_HOST}/jobs/myjobs`, {
+      headers: { Authorization: `${localStorage.getItem("token")}` },
+    })
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .then((err) => {
+      console.log(err);
+      return err;
+    });
+  return api;
+};
+
+// Approve People
+export const approvePeople = (body) => {
+  const api = axios
+    .post(`${API_HOST}/jobs/approve`, body, {
+      headers: { Authorization: `${localStorage.getItem("token")}` },
+    })
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .then((err) => {
+      console.log(err);
+      return err;
+    });
+  return api;
+};

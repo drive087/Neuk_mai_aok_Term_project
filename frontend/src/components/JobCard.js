@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import LabelStatus from "../components/LabelStatus";
+import { approvePeople } from "../actions/action";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -81,12 +82,35 @@ const useStyles = makeStyles({
   },
 });
 
-const JobCard = ({ job, onShowModal }) => {
+const JobCard = ({ job }) => {
   const classes = useStyles();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [jobID, setJobID] = useState(job._id);
   const [isOpen, setIsOpen] = useState(true);
+  const [jobName, setJobName] = useState(job.JobName);
+  const [wages, setWages] = useState(job.Wages);
+  const [location, setLocation] = useState(job.Location);
+  const [jobDetail, setJobDetail] = useState(job.JobDetail);
+  const [startDate, setStartDate] = useState(job.BeginTime);
+  const [endDate, setEndDate] = useState(job.EndTime);
+  const [amount, setAmount] = useState(job.Amount);
+  const [collaborator, setcollaobrator] = useState(job.CurrentEmployee);
   const bull = <span className={classes.bullet}>•</span>;
+
+  const onShowModal = () => {
+    setIsModalOpen(true);
+  };
   const handleClose = () => {
-    setIsOpen(false);
+    setIsModalOpen(false);
+  };
+  useEffect(() => {
+    console.log(job);
+  }, []);
+
+  const handleApprove = (userID) => {
+    console.log(jobID);
+    console.log(userID);
+    approvePeople({ jobId: jobID, userId: userID });
   };
   return (
     <Card className={classes.root}>
@@ -128,7 +152,7 @@ const JobCard = ({ job, onShowModal }) => {
               JobName
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {jobName}
             </Typography>
           </Grid>
           <Grid item xs={3}>
@@ -136,7 +160,7 @@ const JobCard = ({ job, onShowModal }) => {
               JobDetail
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {jobDetail}
             </Typography>
           </Grid>
           <Grid item xs={3}>
@@ -152,7 +176,7 @@ const JobCard = ({ job, onShowModal }) => {
               Amount
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {amount}
             </Typography>
           </Grid>
         </Grid>
@@ -162,7 +186,7 @@ const JobCard = ({ job, onShowModal }) => {
               Location
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {location}
             </Typography>
           </Grid>
           <Grid item xs={3}>
@@ -170,7 +194,7 @@ const JobCard = ({ job, onShowModal }) => {
               BeginTime
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {startDate}
             </Typography>
           </Grid>
           <Grid item xs={3}>
@@ -178,19 +202,48 @@ const JobCard = ({ job, onShowModal }) => {
               EndTime
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
-            </Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <Typography variant="h6" component="h2">
-              Date
-            </Typography>
-            <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {endDate}
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={isModalOpen}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={isModalOpen}>
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title">Colaborator</h2>
+            {collaborator.map((people) => (
+              <div>
+                <Typography>{people.first_name}</Typography>
+                <Button
+                  onClick={() => handleApprove(people.userId)}
+                  className={classes.button_show}
+                >
+                  Approve
+                </Button>
+                <Button className={classes.button_delete}>Reject</Button>
+              </div>
+            ))}
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setIsModalOpen(false)}
+            >
+              OK
+            </Button>
+          </div>
+        </Fade>
+      </Modal>
     </Card>
   );
 };
