@@ -31,39 +31,39 @@ const UserSchema = new Schema({
     {
       JobId: {
         type: String,
-        required: true,
+        required: false,
       },
       JobName: {
         type: String,
-        required: true,
+        required: false,
       },
       JobDetail: {
         type: String,
-        required: true,
+        required: false,
       },
       JobOwner: {
         type: String,
-        required: true,
+        required: false,
       },
       Wages: {
         type: Number,
-        required: true,
+        required: false,
       },
       Amount: {
         type: Number,
-        required: true,
+        required: false,
       },
       Location: {
         type: String,
-        required: true,
+        required: false,
       },
       BeginTime: {
         type: String,
-        required: true,
+        required: false,
       },
       EndTime: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   ],
@@ -71,39 +71,39 @@ const UserSchema = new Schema({
     {
       JobId: {
         type: String,
-        required: true,
+        required: false,
       },
       JobName: {
         type: String,
-        required: true,
+        required: false,
       },
       JobDetail: {
         type: String,
-        required: true,
+        required: false,
       },
       JobOwner: {
         type: String,
-        required: true,
+        required: false,
       },
       Wages: {
         type: Number,
-        required: true,
+        required: false,
       },
       Amount: {
         type: Number,
-        required: true,
+        required: false,
       },
       Location: {
         type: String,
-        required: true,
+        required: false,
       },
       BeginTime: {
         type: String,
-        required: true,
+        required: false,
       },
       EndTime: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   ],
@@ -111,39 +111,39 @@ const UserSchema = new Schema({
     {
       JobId: {
         type: String,
-        required: true,
+        required: false,
       },
       JobName: {
         type: String,
-        required: true,
+        required: false,
       },
       JobDetail: {
         type: String,
-        required: true,
+        required: false,
       },
       JobOwner: {
         type: String,
-        required: true,
+        required: false,
       },
       Wages: {
         type: Number,
-        required: true,
+        required: false,
       },
       Amount: {
         type: Number,
-        required: true,
+        required: false,
       },
       Location: {
         type: String,
-        required: true,
+        required: false,
       },
       BeginTime: {
         type: String,
-        required: true,
+        required: false,
       },
       EndTime: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   ],
@@ -151,39 +151,39 @@ const UserSchema = new Schema({
     {
       JobId: {
         type: String,
-        required: true,
+        required: false,
       },
       JobName: {
         type: String,
-        required: true,
+        required: false,
       },
       JobDetail: {
         type: String,
-        required: true,
+        required: false,
       },
       JobOwner: {
         type: String,
-        required: true,
+        required: false,
       },
       Wages: {
         type: Number,
-        required: true,
+        required: false,
       },
       Amount: {
         type: Number,
-        required: true,
+        required: false,
       },
       Location: {
         type: String,
-        required: true,
+        required: false,
       },
       BeginTime: {
         type: String,
-        required: true,
+        required: false,
       },
       EndTime: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   ],

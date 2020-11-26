@@ -54,6 +54,14 @@ const JobSchema = new Schema({
         type: String,
         required: true,
       },
+      gender: {
+        type: String,
+        required: true,
+      },
+      birthday: {
+        type: String,
+        required: true,
+      },
     },
   ],
   CurrentAcceptedEmployee: [
@@ -71,6 +79,14 @@ const JobSchema = new Schema({
         required: true,
       },
       last_name: {
+        type: String,
+        required: true,
+      },
+      gender: {
+        type: String,
+        required: true,
+      },
+      birthday: {
         type: String,
         required: true,
       },
