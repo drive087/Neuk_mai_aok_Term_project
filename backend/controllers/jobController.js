@@ -83,20 +83,9 @@ exports.apply = async (req, res) => {
       })
       .catch((err) => console.log(err));
   });
-  //   Job.findOneAndUpdate(
-  //     {
-  //       _id: data._id,
-  //     },
-  //     {
-  //       $push: {
-  //         CurrentEmployee: data.employee,
-  //       },
-  //     }
-  //   )
-  //     .then((job) => res.status(200).json("Ok"))
-  //     .catch((err) => console.log(err));
+};
 
-  //   return res.status(200).json({
-  //     sucess: "create success",
-  //   });
+exports.approve = async (req, res) => {
+    console.log(req)
+    
 };
