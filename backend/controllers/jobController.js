@@ -57,9 +57,8 @@ exports.apply = async (req, res) => {
         }
       )
         .then((job) => {
-          console.log(job);
           User.findOneAndUpdate(
-            { _id: req.userInfo._id },
+            { _id: user._id },
             {
               $push: {
                 pending: {
@@ -75,12 +74,14 @@ exports.apply = async (req, res) => {
                 },
               },
             }
-          );
+          ).then((user) => {
+            res.status(200).json(user);
+          });
           res.status(200).json("Ok");
         })
         .catch((err) => {
-            res.status(404).json({ ErrorMessage: "Not found Job" })
-            console.log(err)
+          res.status(404).json({ ErrorMessage: "Not found Job" });
+          console.log(err);
         });
     } else {
       res.status(404).json({ ErrorMessage: "Not found user" });
@@ -92,10 +93,9 @@ exports.approve = async (req, res) => {
   const data = req.body;
 
   User.findById(data.userId).then((user) => {
-    User.findOneAndRemove;
     Job.findOneAndUpdate(
       {
-        _id: data._id,
+        _id: data.jobId,
       },
       {
         $push: {
@@ -108,32 +108,37 @@ exports.approve = async (req, res) => {
             birthday: user.birthday,
           },
         },
+        $pull: {
+          CurrentEmployee: {
+            userId: user._id,
+          },
+        },
       }
-    );
-    //   .then((job) => {
-    //     console.log(job);
-    // User.findOneAndUpdate(
-    //   { _id: req.userInfo._id },
-    //   {
-    //     $push: {
-    //       pending: {
-    //         JobId: job._id,
-    //         JobName: job.JobName,
-    //         JobDetail: job.JobDetail,
-    //         JobOwner: job.JobOwner,
-    //         Wages: job.Wages,
-    //         Amount: job.Amount,
-    //         Location: job.Location,
-    //         BeginTime: job.BeginTime,
-    //         EndTime: job.EndTime,
-    //       },
-    //     },
-    //   }
-    // ).then((res) => {
-    //   console.log(res);
-    // });
-    //     res.status(200).json("Ok");
-    //   })
-    //   .catch((err) => console.log(err));
+    )
+      .then((job) => {
+        User.findOneAndUpdate(
+          { _id: user._id },
+          {
+            $push: {
+              approve: {
+                JobId: job._id,
+                JobName: job.JobName,
+                JobDetail: job.JobDetail,
+                JobOwner: job.JobOwner,
+                Wages: job.Wages,
+                Amount: job.Amount,
+                Location: job.Location,
+                BeginTime: job.BeginTime,
+                EndTime: job.EndTime,
+              },
+            },
+            $pull: { pending: { JobId: job._id } },
+          }
+        ).then((user) => {
+          res.status(200).json(user);
+        });
+        res.status(200).json("Ok");
+      })
+      .catch((err) => console.log(err));
   });
 };
