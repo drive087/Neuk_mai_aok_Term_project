@@ -40,27 +40,27 @@ const JobSchema = new Schema({
     {
       userId: {
         type: String,
-        required: true,
+        required: false,
       },
       email: {
         type: String,
-        required: true,
+        required: false,
       },
       first_name: {
         type: String,
-        required: true,
+        required: false,
       },
       last_name: {
         type: String,
-        required: true,
+        required: false,
       },
       gender: {
         type: String,
-        required: true,
+        required: false,
       },
       birthday: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   ],
@@ -68,27 +68,27 @@ const JobSchema = new Schema({
     {
       userId: {
         type: String,
-        required: true,
+        required: false,
       },
       email: {
         type: String,
-        required: true,
+        required: false,
       },
       first_name: {
         type: String,
-        required: true,
+        required: false,
       },
       last_name: {
         type: String,
-        required: true,
+        required: false,
       },
       gender: {
         type: String,
-        required: true,
+        required: false,
       },
       birthday: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   ],

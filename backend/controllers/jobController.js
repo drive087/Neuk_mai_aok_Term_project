@@ -37,15 +37,69 @@ exports.newJob = async (req, res) => {
 exports.apply = async (req, res) => {
   const data = req.body;
 
-  //   var o_id = new mongo.ObjectID(data._id);
-  User.findById(req.userInfo._id).then((user) => {
+  User.findOne({ _id: req.userInfo._id }).then((user) => {
+    if (user) {
+      Job.findOneAndUpdate(
+        {
+          _id: data._id,
+        },
+        {
+          $push: {
+            CurrentEmployee: {
+              userId: user._id,
+              email: user.email,
+              first_name: user.first_name,
+              last_name: user.last_name,
+              gender: user.gender,
+              birthday: user.birthday,
+            },
+          },
+        }
+      )
+        .then((job) => {
+          User.findOneAndUpdate(
+            { _id: user._id },
+            {
+              $push: {
+                pending: {
+                  JobId: job._id,
+                  JobName: job.JobName,
+                  JobDetail: job.JobDetail,
+                  JobOwner: job.JobOwner,
+                  Wages: job.Wages,
+                  Amount: job.Amount,
+                  Location: job.Location,
+                  BeginTime: job.BeginTime,
+                  EndTime: job.EndTime,
+                },
+              },
+            }
+          ).then((user) => {
+            res.status(200).json(user);
+          });
+          res.status(200).json("Ok");
+        })
+        .catch((err) => {
+          res.status(404).json({ ErrorMessage: "Not found Job" });
+          console.log(err);
+        });
+    } else {
+      res.status(404).json({ ErrorMessage: "Not found user" });
+    }
+  });
+};
+
+exports.approve = async (req, res) => {
+  const data = req.body;
+
+  User.findById(data.userId).then((user) => {
     Job.findOneAndUpdate(
       {
-        _id: data._id,
+        _id: data.jobId,
       },
       {
         $push: {
-          CurrentEmployee: {
+          CurrentAcceptedEmployee: {
             userId: user._id,
             email: user.email,
             first_name: user.first_name,
@@ -54,15 +108,19 @@ exports.apply = async (req, res) => {
             birthday: user.birthday,
           },
         },
+        $pull: {
+          CurrentEmployee: {
+            userId: user._id,
+          },
+        },
       }
     )
       .then((job) => {
-        console.log(job);
         User.findOneAndUpdate(
-          { _id: req.userInfo._id },
+          { _id: user._id },
           {
             $push: {
-              pending: {
+              approve: {
                 JobId: job._id,
                 JobName: job.JobName,
                 JobDetail: job.JobDetail,
@@ -74,18 +132,13 @@ exports.apply = async (req, res) => {
                 EndTime: job.EndTime,
               },
             },
+            $pull: { pending: { JobId: job._id } },
           }
-        ).then((res) => {
-          console.log(res);
-          console.log("asdsadasd");
+        ).then((user) => {
+          res.status(200).json(user);
         });
         res.status(200).json("Ok");
       })
       .catch((err) => console.log(err));
   });
-};
-
-exports.approve = async (req, res) => {
-    console.log(req)
-    
 };
