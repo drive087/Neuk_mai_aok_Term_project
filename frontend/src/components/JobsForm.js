@@ -18,11 +18,11 @@ function JobsForm(props) {
   useEffect(() => {
     axios.get('/jobs/',
       {
-        headers: { Authorization: `Token ${localStorage.getItem('token')}` }
+        headers: { Authorization: `${localStorage.getItem('token')}` }
       })
       .then(res=>{
           if(res.status === 200){
-            setJobs(res.data.result)            
+            setJobs(res.data)            
           }
       })
   },[])

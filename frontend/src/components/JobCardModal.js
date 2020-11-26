@@ -40,7 +40,7 @@ function JobCardModal(props) {
   function onApplyJob(){
     axios.post('/jobs/apply',{_id:_id,employee:localStorage.getItem('username')},
     {
-        headers: { Authorization: `Token ${localStorage.getItem('token')}` },  
+        headers: { Authorization: `${localStorage.getItem('token')}` },  
     }).then(res=>{
         if(res.status === 200){
             window.location.reload();

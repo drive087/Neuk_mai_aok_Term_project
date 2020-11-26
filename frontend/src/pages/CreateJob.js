@@ -54,9 +54,9 @@ function CreateJob(props) {
         ) alert("Wage must be in range of 1-10,000 Baht")
         else if((data.Amount < 1 && data.Amount > 101) || (typeof data.Amount !== "number")) alert("Amount of employees must be in range of 1-100 people/job")
         else {
-            axios.post('/jobs/create',{data},
+            axios.post('/jobs/create',data,
             {
-                headers: { Authorization: `Token ${localStorage.getItem('token')}` },  
+                headers: { Authorization: `${localStorage.getItem('token')}` },  
             }).then(res=>{
                 if(res.status === 200){
                     props.history.push({
@@ -68,10 +68,6 @@ function CreateJob(props) {
             }
         }
 
-
-
-  
- 
   return (
     <div style={{ marginTop: '100px', marginBottom: '100px', paddingLeft: '25%' }}>
       <h1>Create Job</h1>
