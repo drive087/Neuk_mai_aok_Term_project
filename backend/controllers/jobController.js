@@ -142,3 +142,17 @@ exports.approve = async (req, res) => {
       .catch((err) => console.log(err));
   });
 };
+
+exports.getMyJobs = async (req, res) => {
+  User.findById(req.userInfo._id).then((user) => {
+    Job.find({ JobOwner: user.email }).then((jobs) => {
+      res.status(200).json({
+        pending: user.pending,
+        inprogress: user.inprogress,
+        cancel: user.cancel,
+        approve: user.approve,
+        myJobsCreated: jobs
+      });
+    });
+  });
+};
