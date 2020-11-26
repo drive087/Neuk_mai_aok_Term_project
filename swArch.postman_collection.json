@@ -101,7 +101,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJlNWZhYzU0OGYwNmU0OGMwMmI0ZWUiLCJ1c2VybmFtZSI6ImFhYSIsImlhdCI6MTYwNjMxNDY1MCwiZXhwIjoxNjM3ODcxNTc2fQ.vZU4Lo0WIwwLN7ndvdaOymORhA1WrcFErik2X0fJQCE",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZDk0ZDQxMzY4ZTAzZTExOWI1ZTkiLCJ1c2VybmFtZSI6ImtrayIsImlhdCI6MTYwNjQwODU1OSwiZXhwIjoxNjM3OTY1NDg1fQ.MrvRqK7-q2OZd-g_Nusc8J4xTafgAhNBAZtjSwA7a_g",
 							"type": "string"
 						}
 					]
@@ -110,7 +110,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"JobName\": \"lnwzaaa\",\n    \"JobDetail\": \"5555+\",\n    \"Wages\": 100,\n    \"Amount\": 10,\n    \"Location\": \"jobLocation\",\n    \"BeginTime\": \"jobBeginTime\",\n    \"EndTime\": \"jobEndTime\",\n    \"CurrentEmployee\": [],\n    \"CurrentAcceptedEmployee\": [],\n    \"Status\": \"Ready\"\n}",
+					"raw": "{\n    \"JobName\": \"testkkkjobs222198\",\n    \"JobDetail\": \"testandgjs+\",\n    \"Wages\": 200,\n    \"Amount\": 10,\n    \"Location\": \"jobLocation\",\n    \"BeginTime\": \"jobBeginTime\",\n    \"EndTime\": \"jobEndTime\",\n    \"CurrentEmployee\": [],\n    \"CurrentAcceptedEmployee\": [],\n    \"Status\": \"Ready\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -205,6 +205,36 @@
 					"path": [
 						"jobs",
 						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMyJobmanagement",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZDk0ZDQxMzY4ZTAzZTExOWI1ZTkiLCJ1c2VybmFtZSI6ImtrayIsImlhdCI6MTYwNjQwODU1OSwiZXhwIjoxNjM3OTY1NDg1fQ.MrvRqK7-q2OZd-g_Nusc8J4xTafgAhNBAZtjSwA7a_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/jobs/myJobs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"jobs",
+						"myJobs"
 					]
 				}
 			},
