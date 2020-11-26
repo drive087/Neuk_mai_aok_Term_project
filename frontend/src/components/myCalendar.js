@@ -1,9 +1,9 @@
-import React, { useState, Component } from "react";
+import React, { useState, Component, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import events from "./events";
+// import events from "./events";
 const i = 0;
 
 const getRandomColor = (i) => {
@@ -46,9 +46,24 @@ const eventStyleGetter = (event, start, end, isSelected) => {
 
 const localizer = momentLocalizer(moment);
 
+const MyCalendar = ({ jobs }) => {
+  const [events, setEvent] = useState([]);
 
+  const mapEvent = () => {
+    jobs.map((EachJob)=> {
+      const detail = {
+        "title" : EachJob.JobName,
+        "start" : EachJob.BeginTime,
+        "end" : EachJob.EndTime,
+      }
+      events.push(detail)
+    })
+    
+  };
 
-const MyCalendar = () => {
+  useEffect(() => {
+    mapEvent()
+  }, []);
   
   return (
     <div>
@@ -59,8 +74,11 @@ const MyCalendar = () => {
         step={60}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 500 ,width : 900}}
+        style={{ height: 500, width: 900 }}
       />
+      <button onClick={() => console.log(events)}>
+        TESTtdrlkfmytdrtyuilohiuyftdT
+      </button>
     </div>
   );
 };

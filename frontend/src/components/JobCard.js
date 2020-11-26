@@ -15,7 +15,7 @@ import {
   Fade,
 } from "@material-ui/core";
 import axios from "axios";
-
+import LabelStatus from "../components/LabelStatus";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -49,7 +49,7 @@ const useStyles = makeStyles({
   button_start: {
     backgroundColor: "#00a86b",
     color: "#FFFFFF",
-    "&:hover": {  
+    "&:hover": {
       opacity: 1,
       cursor: "pointer",
       backgroundColor: "#edb879",
@@ -57,7 +57,7 @@ const useStyles = makeStyles({
   },
   button_edit: {
     backgroundColor: "#f2ae42",
-    "&:hover": {  
+    "&:hover": {
       opacity: 1,
       cursor: "pointer",
       backgroundColor: "#edb879",
@@ -65,7 +65,7 @@ const useStyles = makeStyles({
   },
   button_delete: {
     backgroundColor: "#fe2e2e",
-    "&:hover": {  
+    "&:hover": {
       opacity: 1,
       cursor: "pointer",
       backgroundColor: "#edb879",
@@ -73,7 +73,7 @@ const useStyles = makeStyles({
   },
   button_show: {
     backgroundColor: "#6db6d9",
-    "&:hover": {  
+    "&:hover": {
       opacity: 1,
       cursor: "pointer",
       backgroundColor: "#edb879",
@@ -91,7 +91,12 @@ const JobCard = ({ job, onShowModal }) => {
   return (
     <Card className={classes.root}>
       <CardHeader
-        title={`Status ${job.Status}`}
+        title={
+          <div>
+            <LabelStatus status={"STATUS"} />
+            <LabelStatus color="ready" status={job.Status} />
+          </div>
+        }
         subheader={
           <div className={classes.space}>
             <Grid container className={classes.space} spacing={2}>
@@ -110,9 +115,7 @@ const JobCard = ({ job, onShowModal }) => {
                 </Button>
               </Grid>
               <Grid item>
-                <Button className={classes.button_start} >
-                  Done
-                </Button>
+                <Button className={classes.button_start}>Done</Button>
               </Grid>
             </Grid>
           </div>
