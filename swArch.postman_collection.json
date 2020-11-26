@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "b410d61f-4009-44c0-97f2-062d7e86817b",
+		"name": "swArch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ccc\",\n    \"password\": \"ccc\",\n    \"first_name\": \"asdadsad\",\n    \"last_name\": \"asdasdasd\",\n    \"gender\": \"male\",\n    \"birthday\": \"19.01.22\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/user/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllJobs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJlNWZhYzU0OGYwNmU0OGMwMmI0ZWUiLCJ1c2VybmFtZSI6ImFhYSIsImlhdCI6MTYwNjMxNDY1MCwiZXhwIjoxNjM3ODcxNTc2fQ.vZU4Lo0WIwwLN7ndvdaOymORhA1WrcFErik2X0fJQCE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/jobs/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"jobs",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ccc\",\n    \"password\" : \"ccc\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJlNWZhYzU0OGYwNmU0OGMwMmI0ZWUiLCJ1c2VybmFtZSI6ImFhYSIsImlhdCI6MTYwNjMxNDY1MCwiZXhwIjoxNjM3ODcxNTc2fQ.vZU4Lo0WIwwLN7ndvdaOymORhA1WrcFErik2X0fJQCE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"JobName\": \"lnwzaaa\",\n    \"JobDetail\": \"5555+\",\n    \"Wages\": 100,\n    \"Amount\": 10,\n    \"Location\": \"jobLocation\",\n    \"BeginTime\": \"jobBeginTime\",\n    \"EndTime\": \"jobEndTime\",\n    \"CurrentEmployee\": [],\n    \"CurrentAcceptedEmployee\": [],\n    \"Status\": \"Ready\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/jobs/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"jobs",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "applyJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmNmU2NTNlMTc1NmY5NzgwNzM0YzIiLCJ1c2VybmFtZSI6ImNjYyIsImlhdCI6MTYwNjM4MTE2OSwiZXhwIjoxNjM3OTM4MDk1fQ.gGo_USlyr0MGp9zkpzQKSJtLIXvgzrr4M1WEG6hoHJo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_id\":\"5fbf6a746134a4f8c5e853d9\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/jobs/apply",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"jobs",
+						"apply"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

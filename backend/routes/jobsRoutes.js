@@ -7,5 +7,6 @@ const router = express.Router();
 router.get("/", jobController.getAll);
 router.post("/create", jobController.newJob);
 router.post("/apply", jobController.apply);
+router.post("/approve", jobController.approve)
 
 module.exports = router;
