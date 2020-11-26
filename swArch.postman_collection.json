@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"ccc\",\n    \"password\": \"ccc\",\n    \"first_name\": \"asdadsad\",\n    \"last_name\": \"asdasdasd\",\n    \"gender\": \"male\",\n    \"birthday\": \"19.01.22\"\n}",
+					"raw": "{\n    \"email\": \"kkk\",\n    \"password\": \"kkk\",\n    \"first_name\": \"asdadsad\",\n    \"last_name\": \"asdasdasd\",\n    \"gender\": \"male\",\n    \"birthday\": \"19.01.22\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -71,7 +71,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"ccc\",\n    \"password\" : \"ccc\"\n}",
+					"raw": "{\n    \"email\": \"kkk\",\n    \"password\" : \"kkk\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -140,7 +140,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmNmU2NTNlMTc1NmY5NzgwNzM0YzIiLCJ1c2VybmFtZSI6ImNjYyIsImlhdCI6MTYwNjM4MTE2OSwiZXhwIjoxNjM3OTM4MDk1fQ.gGo_USlyr0MGp9zkpzQKSJtLIXvgzrr4M1WEG6hoHJo",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZDk0ZDQxMzY4ZTAzZTExOWI1ZTkiLCJ1c2VybmFtZSI6ImtrayIsImlhdCI6MTYwNjQwODU1OSwiZXhwIjoxNjM3OTY1NDg1fQ.MrvRqK7-q2OZd-g_Nusc8J4xTafgAhNBAZtjSwA7a_g",
 							"type": "string"
 						}
 					]
@@ -149,7 +149,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"_id\":\"5fbf6a746134a4f8c5e853d9\"\n}",
+					"raw": "{\n    \"_id\":\"5fbfd2a6b81c4f7205c60b09\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -166,6 +166,45 @@
 					"path": [
 						"jobs",
 						"apply"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "approveJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZDk0ZDQxMzY4ZTAzZTExOWI1ZTkiLCJ1c2VybmFtZSI6ImtrayIsImlhdCI6MTYwNjQwODU1OSwiZXhwIjoxNjM3OTY1NDg1fQ.MrvRqK7-q2OZd-g_Nusc8J4xTafgAhNBAZtjSwA7a_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"jobId\" : \"5fbfd2a6b81c4f7205c60b09\",\n    \"userId\": \"5fbfd94d41368e03e119b5e9\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/jobs/approve",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"jobs",
+						"approve"
 					]
 				}
 			},
