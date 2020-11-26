@@ -37,15 +37,69 @@ exports.newJob = async (req, res) => {
 exports.apply = async (req, res) => {
   const data = req.body;
 
-  //   var o_id = new mongo.ObjectID(data._id);
-  User.findById(req.userInfo._id).then((user) => {
+  User.findOne({ _id: req.userInfo._id }).then((user) => {
+    if (user) {
+      Job.findOneAndUpdate(
+        {
+          _id: data._id,
+        },
+        {
+          $push: {
+            CurrentEmployee: {
+              userId: user._id,
+              email: user.email,
+              first_name: user.first_name,
+              last_name: user.last_name,
+              gender: user.gender,
+              birthday: user.birthday,
+            },
+          },
+        }
+      )
+        .then((job) => {
+          console.log(job);
+          User.findOneAndUpdate(
+            { _id: req.userInfo._id },
+            {
+              $push: {
+                pending: {
+                  JobId: job._id,
+                  JobName: job.JobName,
+                  JobDetail: job.JobDetail,
+                  JobOwner: job.JobOwner,
+                  Wages: job.Wages,
+                  Amount: job.Amount,
+                  Location: job.Location,
+                  BeginTime: job.BeginTime,
+                  EndTime: job.EndTime,
+                },
+              },
+            }
+          );
+          res.status(200).json("Ok");
+        })
+        .catch((err) => {
+            res.status(404).json({ ErrorMessage: "Not found Job" })
+            console.log(err)
+        });
+    } else {
+      res.status(404).json({ ErrorMessage: "Not found user" });
+    }
+  });
+};
+
+exports.approve = async (req, res) => {
+  const data = req.body;
+
+  User.findById(data.userId).then((user) => {
+    User.findOneAndRemove;
     Job.findOneAndUpdate(
       {
         _id: data._id,
       },
       {
         $push: {
-          CurrentEmployee: {
+          CurrentAcceptedEmployee: {
             userId: user._id,
             email: user.email,
             first_name: user.first_name,
@@ -55,37 +109,31 @@ exports.apply = async (req, res) => {
           },
         },
       }
-    )
-      .then((job) => {
-        console.log(job);
-        User.findOneAndUpdate(
-          { _id: req.userInfo._id },
-          {
-            $push: {
-              pending: {
-                JobId: job._id,
-                JobName: job.JobName,
-                JobDetail: job.JobDetail,
-                JobOwner: job.JobOwner,
-                Wages: job.Wages,
-                Amount: job.Amount,
-                Location: job.Location,
-                BeginTime: job.BeginTime,
-                EndTime: job.EndTime,
-              },
-            },
-          }
-        ).then((res) => {
-          console.log(res);
-          console.log("asdsadasd");
-        });
-        res.status(200).json("Ok");
-      })
-      .catch((err) => console.log(err));
+    );
+    //   .then((job) => {
+    //     console.log(job);
+    // User.findOneAndUpdate(
+    //   { _id: req.userInfo._id },
+    //   {
+    //     $push: {
+    //       pending: {
+    //         JobId: job._id,
+    //         JobName: job.JobName,
+    //         JobDetail: job.JobDetail,
+    //         JobOwner: job.JobOwner,
+    //         Wages: job.Wages,
+    //         Amount: job.Amount,
+    //         Location: job.Location,
+    //         BeginTime: job.BeginTime,
+    //         EndTime: job.EndTime,
+    //       },
+    //     },
+    //   }
+    // ).then((res) => {
+    //   console.log(res);
+    // });
+    //     res.status(200).json("Ok");
+    //   })
+    //   .catch((err) => console.log(err));
   });
-};
-
-exports.approve = async (req, res) => {
-    console.log(req)
-    
 };

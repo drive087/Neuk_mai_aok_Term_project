@@ -71,7 +71,7 @@ app.use(async (req) => {
     // console.log(userInfo);
 
     req.userInfo = userInfo;
-    console.log(req.userInfo)
+    // console.log(req.userInfo)
     return req.next();
   } catch (e) {
     return req.next();
