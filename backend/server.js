@@ -6,6 +6,7 @@ const cors = require("cors");
 const LocalStrategy = require("passport-local").Strategy;
 const dotenv = require('dotenv');
 const passport = require("passport");
+const jwt_decode = require("jwt-decode");
 
 console.log("Start server");
 
@@ -63,11 +64,13 @@ require("./config/passport")(passport);
 // app.use(passport.session());
 
 app.use(async (req) => {
+  // console.log(jwt_decode(req.headers.authorization))
   try {
     // const token = req.headers.authorization
     const userInfo = jwt_decode(req.headers.authorization);
     // console.log(userInfo);
     req.userInfo = userInfo;
+    console.log(req.userInfo)
     return req.next();
   } catch (e) {
     return req.next();
