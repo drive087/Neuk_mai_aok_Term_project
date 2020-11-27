@@ -1,5 +1,4 @@
-const express = require("express");
-const bcrypt = require("bcryptjs");
+
 const Job = require("../models/jobModel");
 const User = require("../models/userModel");
 

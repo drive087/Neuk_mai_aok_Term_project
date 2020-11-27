@@ -1,8 +1,4 @@
-const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const keys = require("../config/key");
 const User = require("../models/userModel");
 
 exports.signup =  async (req, res, next) => {
