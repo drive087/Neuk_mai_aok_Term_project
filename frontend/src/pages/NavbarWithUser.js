@@ -23,6 +23,8 @@ import Dashboard from './Dashboard';
 import CreateJob from './CreateJob';
 import Schedule from './Schedule';
 import JobManagementPage from './JobManagementPage'
+import EditJob from "./EditJob"
+
 
 const drawerWidth = 240;
 
@@ -173,6 +175,8 @@ export default function PersistentDrawerLeft(props) {
           <Route exact path="/CreateJob" component={CreateJob} />
           <Route exact path="/Schedule" component={Schedule} />
           <Route exact path="/jobmanagement" component={JobManagementPage} />
+          <Route exact path="/EditJob" component={EditJob} />
+
         </div>
       </Router>
       <Footer id='Footer' />

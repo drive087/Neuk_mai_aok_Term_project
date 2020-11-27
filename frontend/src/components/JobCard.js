@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import LabelStatus from "../components/LabelStatus";
+import { approvePeople } from "../actions/action";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -65,6 +66,7 @@ const useStyles = makeStyles({
   },
   button_delete: {
     backgroundColor: "#fe2e2e",
+    color: "#FFFFFF",
     "&:hover": {
       opacity: 1,
       cursor: "pointer",
@@ -72,21 +74,57 @@ const useStyles = makeStyles({
     },
   },
   button_show: {
-    backgroundColor: "#6db6d9",
+    backgroundColor: "#1c77c3",
+    color: "#FFFFFF",
     "&:hover": {
       opacity: 1,
       cursor: "pointer",
       backgroundColor: "#edb879",
     },
   },
+  button_approve: {
+    backgroundColor: "#5cb85c",
+    color: "#FFFFFF",
+    "&:hover": {
+      opacity: 1,
+      cursor: "pointer",
+      backgroundColor: "#5cb85c",
+    },
+  },
 });
 
-const JobCard = ({ job, onShowModal }) => {
+const JobCard = ({ job, _status }) => {
   const classes = useStyles();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [jobID, setJobID] = useState(job._id);
   const [isOpen, setIsOpen] = useState(true);
+  const [jobName, setJobName] = useState(job.JobName);
+  const [wages, setWages] = useState(job.Wages);
+  const [location, setLocation] = useState(job.Location);
+  const [jobDetail, setJobDetail] = useState(job.JobDetail);
+  const [startDate, setStartDate] = useState(job.BeginTime);
+  const [endDate, setEndDate] = useState(job.EndTime);
+  const [amount, setAmount] = useState(job.Amount);
+  const [collaborator, setcollaobrator] = useState(job.CurrentEmployee);
+  const [status, setStatus] = useState(job.Status ? job.Status : _status);
   const bull = <span className={classes.bullet}>•</span>;
+
+  const onShowModal = () => {
+    setIsModalOpen(true);
+  };
   const handleClose = () => {
-    setIsOpen(false);
+    setIsModalOpen(false);
+  };
+  useEffect(() => {
+    console.log(job);
+  }, []);
+
+  const handleApprove = (userID) => {
+    console.log(jobID);
+    console.log(userID);
+    approvePeople({ jobId: jobID, userId: userID });
+  };
+  const handleEdit = () => {
   };
   return (
     <Card className={classes.root}>
@@ -94,7 +132,7 @@ const JobCard = ({ job, onShowModal }) => {
         title={
           <div>
             <LabelStatus status={"STATUS"} />
-            <LabelStatus color="ready" status={job.Status} />
+            <LabelStatus color={`${_status}`} status={status} />
           </div>
         }
         subheader={
@@ -104,14 +142,16 @@ const JobCard = ({ job, onShowModal }) => {
                 <Button className={classes.button_start}>Start</Button>
               </Grid>
               <Grid item>
-                <Button className={classes.button_edit}>Edit</Button>
+                <Button className={classes.button_edit} href={"/EditJob"} onClick={handleEdit}>
+                  Edit
+                </Button>
               </Grid>
               <Grid item>
                 <Button className={classes.button_delete}>Delete</Button>
               </Grid>
               <Grid item>
                 <Button className={classes.button_show} onClick={onShowModal}>
-                  Show Colaborator
+                  Show Collaborator
                 </Button>
               </Grid>
               <Grid item>
@@ -128,7 +168,7 @@ const JobCard = ({ job, onShowModal }) => {
               JobName
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {jobName}
             </Typography>
           </Grid>
           <Grid item xs={3}>
@@ -136,7 +176,7 @@ const JobCard = ({ job, onShowModal }) => {
               JobDetail
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {jobDetail}
             </Typography>
           </Grid>
           <Grid item xs={3}>
@@ -152,7 +192,7 @@ const JobCard = ({ job, onShowModal }) => {
               Amount
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {amount}
             </Typography>
           </Grid>
         </Grid>
@@ -162,7 +202,7 @@ const JobCard = ({ job, onShowModal }) => {
               Location
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {location}
             </Typography>
           </Grid>
           <Grid item xs={3}>
@@ -170,7 +210,7 @@ const JobCard = ({ job, onShowModal }) => {
               BeginTime
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {startDate}
             </Typography>
           </Grid>
           <Grid item xs={3}>
@@ -178,19 +218,56 @@ const JobCard = ({ job, onShowModal }) => {
               EndTime
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
-            </Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <Typography variant="h6" component="h2">
-              Date
-            </Typography>
-            <Typography className={classes.pos} color="textSecondary">
-              {job.JobName}
+              {endDate}
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={isModalOpen}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={isModalOpen}>
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title">Collaborator</h2>
+            {!!collaborator &&
+              collaborator.map((people) => (
+                <Grid container spacing={2}>
+                  <Grid item>
+                    <Typography>{people.first_name}</Typography>
+                  </Grid>
+
+                  <Grid item>
+                    <Button
+                      onClick={() => handleApprove(people.userId)}
+                      className={classes.button_approve}
+                    >
+                      Approve
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button className={classes.button_delete}>Reject</Button>
+                  </Grid>
+                </Grid>
+              ))}
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setIsModalOpen(false)}
+            >
+              OK
+            </Button>
+          </div>
+        </Fade>
+      </Modal>
     </Card>
   );
 };
