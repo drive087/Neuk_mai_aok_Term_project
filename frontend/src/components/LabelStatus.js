@@ -23,34 +23,18 @@ const useStyles = makeStyles(() => ({
     padding: 5,
     textTransform: "uppercase",
   },
-  ready: {
+  Ready: {
     color: "#00a86b",
     backgroundColor: fade("#00a86b", 0.2),
   },
-  inprogess: {
+  Inprogess: {
     color: "#f2ae42",
     backgroundColor: fade("#f2ae42", 0.2),
   },
-  // error: {
-  //   color: theme.palette.error.main,
-  //   backgroundColor: fade(theme.palette.error.main, 0.08)
-  // },
-  // success: {
-  //   color: theme.palette.success.main,
-  //   backgroundColor: fade(theme.palette.success.main, 0.08)
-  // },
-  // warning: {
-  //   color: theme.palette.warning.main,
-  //   backgroundColor: fade(theme.palette.warning.main, 0.08)
-  // },
-  // notsave: {
-  //   color : Colors.UNNAMED_COLOR_000000,
-  //   backgroundColor: fade(Colors.PIE_COLOR_2,0.3)
-  // },
-  // outlined: {
-  //   border: `1px solid ${Colors.SEARCH_BOX}`,
-  //   backgroundColor: Colors.BUTTON_INACTIVE
-  // }
+  Pending: {
+    color: "#666666",
+    backgroundColor: fade("#666666", 0.2),
+  },
 }));
 
 const LabelStatus = ({

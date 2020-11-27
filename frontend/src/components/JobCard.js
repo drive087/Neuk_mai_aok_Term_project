@@ -66,6 +66,7 @@ const useStyles = makeStyles({
   },
   button_delete: {
     backgroundColor: "#fe2e2e",
+    color: "#FFFFFF",
     "&:hover": {
       opacity: 1,
       cursor: "pointer",
@@ -73,16 +74,26 @@ const useStyles = makeStyles({
     },
   },
   button_show: {
-    backgroundColor: "#6db6d9",
+    backgroundColor: "#1c77c3",
+    color: "#FFFFFF",
     "&:hover": {
       opacity: 1,
       cursor: "pointer",
       backgroundColor: "#edb879",
     },
   },
+  button_approve: {
+    backgroundColor: "#5cb85c",
+    color: "#FFFFFF",
+    "&:hover": {
+      opacity: 1,
+      cursor: "pointer",
+      backgroundColor: "#5cb85c",
+    },
+  },
 });
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, _status }) => {
   const classes = useStyles();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [jobID, setJobID] = useState(job._id);
@@ -95,6 +106,7 @@ const JobCard = ({ job }) => {
   const [endDate, setEndDate] = useState(job.EndTime);
   const [amount, setAmount] = useState(job.Amount);
   const [collaborator, setcollaobrator] = useState(job.CurrentEmployee);
+  const [status, setStatus] = useState(job.Status ? job.Status : _status);
   const bull = <span className={classes.bullet}>•</span>;
 
   const onShowModal = () => {
@@ -112,13 +124,15 @@ const JobCard = ({ job }) => {
     console.log(userID);
     approvePeople({ jobId: jobID, userId: userID });
   };
+  const handleEdit = () => {
+  };
   return (
     <Card className={classes.root}>
       <CardHeader
         title={
           <div>
             <LabelStatus status={"STATUS"} />
-            <LabelStatus color="ready" status={job.Status} />
+            <LabelStatus color={`${_status}`} status={status} />
           </div>
         }
         subheader={
@@ -128,14 +142,16 @@ const JobCard = ({ job }) => {
                 <Button className={classes.button_start}>Start</Button>
               </Grid>
               <Grid item>
-                <Button className={classes.button_edit}>Edit</Button>
+                <Button className={classes.button_edit} href={"/EditJob"} onClick={handleEdit}>
+                  Edit
+                </Button>
               </Grid>
               <Grid item>
                 <Button className={classes.button_delete}>Delete</Button>
               </Grid>
               <Grid item>
                 <Button className={classes.button_show} onClick={onShowModal}>
-                  Show Colaborator
+                  Show Collaborator
                 </Button>
               </Grid>
               <Grid item>
@@ -221,19 +237,27 @@ const JobCard = ({ job }) => {
       >
         <Fade in={isModalOpen}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Colaborator</h2>
-            {collaborator.map((people) => (
-              <div>
-                <Typography>{people.first_name}</Typography>
-                <Button
-                  onClick={() => handleApprove(people.userId)}
-                  className={classes.button_show}
-                >
-                  Approve
-                </Button>
-                <Button className={classes.button_delete}>Reject</Button>
-              </div>
-            ))}
+            <h2 id="transition-modal-title">Collaborator</h2>
+            {!!collaborator &&
+              collaborator.map((people) => (
+                <Grid container spacing={2}>
+                  <Grid item>
+                    <Typography>{people.first_name}</Typography>
+                  </Grid>
+
+                  <Grid item>
+                    <Button
+                      onClick={() => handleApprove(people.userId)}
+                      className={classes.button_approve}
+                    >
+                      Approve
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button className={classes.button_delete}>Reject</Button>
+                  </Grid>
+                </Grid>
+              ))}
             <Button
               variant="contained"
               color="primary"
