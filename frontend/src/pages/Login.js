@@ -49,17 +49,21 @@ function Login(props) {
         
         window.location.reload();
       }
+      
     }).catch(err=>{
-      if(err.response.status === 400){
-        // setStatus('*ชื่อผู้ใช้หรือรหัสผ่านผิด')
+      if (err.response.status==429){
+        alert("Try again in 15min.")
       }
-      if(err.response.status === 422){
+      else if(err.response.status === 400){
+        alert("Please check email or password.")
+      }
+      else if(err.response.status === 422){
         let res = err.response.data
         if(res.errors.password){
-          // setStatus('*กรุณากรอกรหัสผ่าน')
+          alert("Please check email or password.")
         }
         if(res.errors.username){
-          // setStatus('*กรุณากรอกชื่อผู้ใช้')
+          alert("Please check email or password.")
         }
       }
     })

@@ -3,10 +3,14 @@ const mongoUtil = require('../mongoUtil')
 const jwt = require('jsonwebtoken');
 
 let userDb = mongoUtil.getUserDb()
-
 const passport = require('passport')
-
 let auth = require('../auth')
+const rateLimit = require("express-rate-limit");
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10
+});
 
 const router = express.Router()
 
@@ -16,6 +20,7 @@ const saltRounds = 10;
 router.get('/', (req, res) => {
     res.send('Hello World')
 })
+
 
 router.post('/register', (req, res, next) => {
     const user = req.body
@@ -50,30 +55,9 @@ router.post('/register', (req, res, next) => {
     })
   })
 
-router.get('/login', auth.required, (req, res, next) => {
-  
-  let token = null;
-  console.log('get login')
-  const { headers: { authorization } } = req;
-  if(authorization && authorization.split(' ')[0] === 'Token') {
-    token =  authorization.split(' ')[1];
-    var user = jwt.verify(token, 'secret');
+router.use('/user/login', apiLimiter)
 
-    return res.status(200).json({ 
-      user: {
-        _id: user.id,
-        username: user.email,
-      }});
-  }
-  else {
-    return res.status(400).json({ 
-      user: {
-        status: 'pls login first'
-      }});
-  }
-})
-
-// //Case login
+//Case login
 router.post('/login', auth.optional, (req, res, next) => {
     const user = req.body
     if(!user.email) {
@@ -121,28 +105,5 @@ router.post('/login', auth.optional, (req, res, next) => {
     })(req, res, next);
 })
 
-
-// //Case getallpatients
-// router.get('/:_id/getpatients', auth.required, (req, res, next) => {
-//     const doctor = req.params;
-//     console.log(patientDb.collection('user'))
-    
-
-//     patientDb.collection('user').find({doctor:doctor._id}).toArray()
-//     .then((patients) => {
-//       if(!patients) {
-//         return res.sendStatus(400);
-//       }
-//       let patientArray = []
-//       patients.forEach(patient => {
-//         patientArray.push(patient)
-//       });
-
-
-//       return res.json(patientArray);
-//     });
-
-    
-// })
 
 module.exports = router

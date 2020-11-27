@@ -3,6 +3,8 @@ const mongoUtil = require('./mongoUtil')
 const session = require('express-session')
 const cors = require('cors');
 const LocalStrategy = require('passport-local').Strategy;
+var helmet =require('helmet');
+
 
 console.log("Start server")
 
@@ -13,6 +15,27 @@ mongoUtil.connectToServer( function( err, client ) {
   const jobRouter = require('./routes/jobs')
   const app = express()
   
+  app.use(cors({
+      origin:['http://localhost:3000'],
+      credentials:true
+  }));
+
+  app.use(helmet());
+  
+  app.use(express.json())
+  app.all('*', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+  app.use(session({
+    secret: 'qve~UV20_0',
+    resave: false,
+    saveUninitialized: false
+  }));
+
   app.use(cors({
       origin:['http://localhost:3000'],
       credentials:true
@@ -43,4 +66,5 @@ mongoUtil.connectToServer( function( err, client ) {
     res.send('Hello WOrld')
   })
   app.listen(8000, () => console.log('server started'))
+
 } );
