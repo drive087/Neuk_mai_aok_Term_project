@@ -187,6 +187,46 @@ const UserSchema = new Schema({
       },
     },
   ],
+  done: [
+    {
+      JobId: {
+        type: String,
+        required: false,
+      },
+      JobName: {
+        type: String,
+        required: false,
+      },
+      JobDetail: {
+        type: String,
+        required: false,
+      },
+      JobOwner: {
+        type: String,
+        required: false,
+      },
+      Wages: {
+        type: Number,
+        required: false,
+      },
+      Amount: {
+        type: Number,
+        required: false,
+      },
+      Location: {
+        type: String,
+        required: false,
+      },
+      BeginTime: {
+        type: String,
+        required: false,
+      },
+      EndTime: {
+        type: String,
+        required: false,
+      },
+    },
+  ],
 });
 
 module.exports = User = mongoose.model("Users", UserSchema, "Users");

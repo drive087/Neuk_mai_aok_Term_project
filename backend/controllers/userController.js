@@ -22,6 +22,7 @@ exports.signup =  async (req, res, next) => {
         inprogress: [],
         cancel: [],
         approve: [],
+        done: []
       });
       // Hash password before saving in database
       bcrypt.genSalt(10, (err, salt) => {

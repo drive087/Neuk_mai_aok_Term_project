@@ -56,18 +56,6 @@ exports.editJob = async (req, res) => {
     });
 };
 
-// const isInprogress = async (jobId) => {
-//   Job.findById(jobId).then((job) => {
-//     if (job.Amount <= job.CurrentAcceptedEmployee.length) {
-//       console.log("yyyyyyy");
-//       return true;
-//     } else {
-//       console.log("NNNNNN");
-//       return false;
-//     }
-//   });
-// };
-
 exports.apply = async (req, res) => {
   const data = req.body;
 
@@ -218,8 +206,6 @@ exports.approve = async (req, res) => {
               .catch((err) => {
                 res.json(err);
               });
-            // job.CurrentEmployee.map((user)=> {movependingtocancel(job._id)})
-            // job.CurrentAcceptedEmployee.map((user)=> {moveapprovetoinprogress(job._id)})
           }
           res.status(200).json(user);
         });
@@ -240,5 +226,32 @@ exports.getMyJobs = async (req, res) => {
         myJobsCreated: jobs,
       });
     });
+  });
+};
+
+exports.finishJob = async (req, res) => {
+  const data = req.body;
+  Job.findByIdAndUpdate(data.jobId, { Status: "Done" }).then((job) => {
+    job.CurrentAcceptedEmployee.map((user) => {
+      User.findByIdAndUpdate(user.userId, {
+        $pull: {
+          inprogress: { JobId: job._id },
+        },
+        $push: {
+          done: {
+            JobId: job._id,
+            JobName: job.JobName,
+            JobDetail: job.JobDetail,
+            JobOwner: job.JobOwner,
+            Wages: job.Wages,
+            Amount: job.Amount,
+            Location: job.Location,
+            BeginTime: job.BeginTime,
+            EndTime: job.EndTime,
+          },
+        },
+      }).then((user) => console.log("finish done"));
+    });
+    res.json({ success: "finish workkkk" });
   });
 };
