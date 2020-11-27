@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"kkk\",\n    \"password\": \"kkk\",\n    \"first_name\": \"asdadsad\",\n    \"last_name\": \"asdasdasd\",\n    \"gender\": \"male\",\n    \"birthday\": \"19.01.22\"\n}",
+					"raw": "{\n    \"email\": \"duck\",\n    \"password\": \"duck\",\n    \"first_name\": \"asdadsad\",\n    \"last_name\": \"asdasdasd\",\n    \"gender\": \"male\",\n    \"birthday\": \"19.01.22\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -71,7 +71,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"kkk\",\n    \"password\" : \"kkk\"\n}",
+					"raw": "{\n    \"email\": \"duck\",\n    \"password\" : \"duck\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -101,7 +101,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZDk0ZDQxMzY4ZTAzZTExOWI1ZTkiLCJ1c2VybmFtZSI6ImtrayIsImlhdCI6MTYwNjQwODU1OSwiZXhwIjoxNjM3OTY1NDg1fQ.MrvRqK7-q2OZd-g_Nusc8J4xTafgAhNBAZtjSwA7a_g",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZTRlM2QyODZhZDA2NWQxN2I2ZTAiLCJ1c2VybmFtZSI6ImRvZyIsImlhdCI6MTYwNjQxMjY3NSwiZXhwIjoxNjM3OTY5NjAxfQ.hJYRcezN7fovQpkuPFqkZcNiBBj-nwIyONOVYhMcjj8",
 							"type": "string"
 						}
 					]
@@ -110,7 +110,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"JobName\": \"testkkkjobs222198\",\n    \"JobDetail\": \"testandgjs+\",\n    \"Wages\": 200,\n    \"Amount\": 10,\n    \"Location\": \"jobLocation\",\n    \"BeginTime\": \"jobBeginTime\",\n    \"EndTime\": \"jobEndTime\",\n    \"CurrentEmployee\": [],\n    \"CurrentAcceptedEmployee\": [],\n    \"Status\": \"Ready\"\n}",
+					"raw": "{\n    \"JobName\": \"NewJob1More\",\n    \"JobDetail\": \"testandgjs+\",\n    \"Wages\": 200,\n    \"Amount\": 1,\n    \"Location\": \"jobLocation\",\n    \"BeginTime\": \"jobBeginTime\",\n    \"EndTime\": \"jobEndTime\",\n    \"CurrentEmployee\": [],\n    \"CurrentAcceptedEmployee\": [],\n    \"Status\": \"Ready\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -140,7 +140,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZDk0ZDQxMzY4ZTAzZTExOWI1ZTkiLCJ1c2VybmFtZSI6ImtrayIsImlhdCI6MTYwNjQwODU1OSwiZXhwIjoxNjM3OTY1NDg1fQ.MrvRqK7-q2OZd-g_Nusc8J4xTafgAhNBAZtjSwA7a_g",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZWEzNDQyM2MyYjA5MDc3OTk5OGIiLCJ1c2VybmFtZSI6ImR1Y2siLCJpYXQiOjE2MDY0MTI4NjIsImV4cCI6MTYzNzk2OTc4OH0.K529ML9G46UPFvURJUx0rBToVdiMH-OpiBLYADkN9AU",
 							"type": "string"
 						}
 					]
@@ -149,7 +149,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"_id\":\"5fbfd2a6b81c4f7205c60b09\"\n}",
+					"raw": "{\n    \"_id\":\"5fc083a710c5e90ab437137d\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -179,7 +179,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZDk0ZDQxMzY4ZTAzZTExOWI1ZTkiLCJ1c2VybmFtZSI6ImtrayIsImlhdCI6MTYwNjQwODU1OSwiZXhwIjoxNjM3OTY1NDg1fQ.MrvRqK7-q2OZd-g_Nusc8J4xTafgAhNBAZtjSwA7a_g",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZTRlM2QyODZhZDA2NWQxN2I2ZTAiLCJ1c2VybmFtZSI6ImRvZyIsImlhdCI6MTYwNjQxMjY3NSwiZXhwIjoxNjM3OTY5NjAxfQ.hJYRcezN7fovQpkuPFqkZcNiBBj-nwIyONOVYhMcjj8",
 							"type": "string"
 						}
 					]
@@ -188,7 +188,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"jobId\" : \"5fbfd2a6b81c4f7205c60b09\",\n    \"userId\": \"5fbfd94d41368e03e119b5e9\"\n}",
+					"raw": "{\n    \"jobId\" : \"5fc083a710c5e90ab437137d\",\n    \"userId\": \"5fbfea34423c2b090779998b\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -218,7 +218,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZDk0ZDQxMzY4ZTAzZTExOWI1ZTkiLCJ1c2VybmFtZSI6ImtrayIsImlhdCI6MTYwNjQwODU1OSwiZXhwIjoxNjM3OTY1NDg1fQ.MrvRqK7-q2OZd-g_Nusc8J4xTafgAhNBAZtjSwA7a_g",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZWEzNDQyM2MyYjA5MDc3OTk5OGIiLCJ1c2VybmFtZSI6ImR1Y2siLCJpYXQiOjE2MDY0NjEzMTgsImV4cCI6MTYzODAxODI0NH0.zCThvqRW3MwTpaT91ZqXoAbRV4pEKf205isTXXasBgI",
 							"type": "string"
 						}
 					]
@@ -235,6 +235,84 @@
 					"path": [
 						"jobs",
 						"myJobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getJobById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZWEzNDQyM2MyYjA5MDc3OTk5OGIiLCJ1c2VybmFtZSI6ImR1Y2siLCJpYXQiOjE2MDY0NjEzMTgsImV4cCI6MTYzODAxODI0NH0.zCThvqRW3MwTpaT91ZqXoAbRV4pEKf205isTXXasBgI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/jobs/getJobById/5fc079451d114f0ddb325b2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"jobs",
+						"getJobById",
+						"5fc079451d114f0ddb325b2"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "asdasdasdasd",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateJobById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZWEzNDQyM2MyYjA5MDc3OTk5OGIiLCJ1c2VybmFtZSI6ImR1Y2siLCJpYXQiOjE2MDY0NjEzMTgsImV4cCI6MTYzODAxODI0NH0.zCThvqRW3MwTpaT91ZqXoAbRV4pEKf205isTXXasBgI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"JobDetail\": \"Term Project !!! + eiei\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/jobs/updateJob/5fc079451d114f0ddb325b2c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"jobs",
+						"updateJob",
+						"5fc079451d114f0ddb325b2c"
 					]
 				}
 			},
