@@ -6,8 +6,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const dotenv = require('dotenv');
 const passport = require("passport");
 const jwt_decode = require("jwt-decode");
-
-console.log("Start server");
+const logger = require("./log/logger")
 
 // const passport = require("./passport").pp();
 const userRouter = require("./routes/userRoutes");
@@ -28,8 +27,8 @@ const uri = process.env.DATABASE.replace(
 // Connect to MongoDB
 mongoose
   .connect(uri, { useNewUrlParser: true })
-  .then(() => console.log("MongoDB successfully connected"))
-  .catch((err) => console.log(err));
+  .then(() => logger.info("MongoDB successfully connected"))
+  .catch((err) => logger.error(err));
 
 app.use(
   cors({
@@ -63,25 +62,18 @@ require("./config/passport")(passport);
 // app.use(passport.session());
 
 app.use(async (req) => {
-  // console.log(jwt_decode(req.headers.authorization))
   try {
-    // const token = req.headers.authorization
     const userInfo = jwt_decode(req.headers.authorization);
-    // console.log(userInfo);
-
     req.userInfo = userInfo;
-    // console.log(req.userInfo)
     return req.next();
   } catch (e) {
     return req.next();
   }
 });
 
-//   app.use('/', doctorRouter)
 app.use("/user", userRouter);
-// app.use("/jobs", jobRouter);
 app.use("/jobs", passport.authenticate("jwt", { session: false }), jobRouter);
 app.use("/", (req, res, next) => {
   res.send("Hello World");
 });
-app.listen(8000, () => console.log("server started"));
+app.listen(8000, () => logger.info("Server Started: 8000"));
