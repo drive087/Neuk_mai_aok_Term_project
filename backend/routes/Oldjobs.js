@@ -61,5 +61,12 @@ router.post('/create', auth.required, (req, res, next) => {
     })
   })
 
+  // router.post('/geteiei', auth.required, (req, res) => {
+  //   const data = req.body
+  //   return res.status(200).json({
+  //     sucess:'test eiei'
+  // })
+  // })
+
 
 module.exports = router
