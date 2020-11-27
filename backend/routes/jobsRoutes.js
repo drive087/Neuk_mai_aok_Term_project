@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoUtil = require("../mongoUtil");
 const jobController = require("../controllers/jobController");
 
 const router = express.Router();
@@ -9,5 +8,7 @@ router.post("/create", jobController.newJob);
 router.post("/apply", jobController.apply);
 router.post("/approve", jobController.approve);
 router.get("/myJobs", jobController.getMyJobs);
+router.get("/getJobById/:id", jobController.getJobById);
+router.patch("/updateJob/:id", jobController.editJob)
 
 module.exports = router;

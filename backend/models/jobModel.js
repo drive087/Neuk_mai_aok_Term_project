@@ -6,35 +6,35 @@ const Schema = mongoose.Schema;
 const JobSchema = new Schema({
   JobName: {
     type: String,
-    required: true,
+    required: false,
   },
   JobDetail: {
     type: String,
-    required: true,
+    required: false,
   },
   JobOwner: {
     type: String,
-    required: true,
+    required: false,
   },
   Wages: {
     type: Number,
-    required: true,
+    required: false,
   },
   Amount: {
     type: Number,
-    required: true,
+    required: false,
   },
   Location: {
     type: String,
-    required: true,
+    required: false,
   },
   BeginTime: {
     type: String,
-    required: true,
+    required: false,
   },
   EndTime: {
     type: String,
-    required: true,
+    required: false,
   },
   CurrentEmployee: [
     {
@@ -94,7 +94,7 @@ const JobSchema = new Schema({
   ],
   Status: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 

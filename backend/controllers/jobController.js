@@ -34,6 +34,36 @@ exports.newJob = async (req, res) => {
     .catch((err) => console.log(err));
 };
 
+exports.getJobById = async (req, res) => {
+  const jobId = req.param("id");
+  Job.findById(jobId)
+    .then((job) => {
+      res.status(200).json(job);
+    })
+    .catch((err) => {
+      res.status(404).json({ ErrorMessage: "Not Found this Job ID" });
+    });
+};
+
+exports.editJob = async (req, res) => {
+    const jobId = req.param("id");
+    Job.findByIdAndUpdate(jobId,req.body).then((job)=> {
+        res.status(201).json({ Success: "Update Job success"})
+    }).catch((err) => {
+        res.status(404).json({ ErrorMessage: "Not Found this Job ID" });
+    })
+}
+
+const isInprogress = async (jobId) => {
+  Job.findById(jobId).then((job) => {
+    if (job.Amont >= job.CurrentAcceptedEmployee.length) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+};
+
 exports.apply = async (req, res) => {
   const data = req.body;
 
@@ -135,6 +165,15 @@ exports.approve = async (req, res) => {
             $pull: { pending: { JobId: job._id } },
           }
         ).then((user) => {
+          if (isInprogress(job._id)) {
+            Job.findByIdAndUpdate(job._id, { Status: "Inprogress" }).then(
+              (job) => {
+                console.log(user._id);
+              }
+            );
+            // job.CurrentEmployee.map((user)=> {movependingtocancel(job._id)})
+            // job.CurrentAcceptedEmployee.map((user)=> {moveapprovetoinprogress(job._id)})
+          }
           res.status(200).json(user);
         });
         res.status(200).json("Ok");
@@ -151,7 +190,7 @@ exports.getMyJobs = async (req, res) => {
         inprogress: user.inprogress,
         cancel: user.cancel,
         approve: user.approve,
-        myJobsCreated: jobs
+        myJobsCreated: jobs,
       });
     });
   });

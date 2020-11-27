@@ -83,6 +83,6 @@ app.use("/user", userRouter);
 // app.use("/jobs", jobRouter);
 app.use("/jobs", passport.authenticate("jwt", { session: false }), jobRouter);
 app.use("/", (req, res, next) => {
-  res.send("Hello WOrld");
+  res.send("Hello World");
 });
 app.listen(8000, () => console.log("server started"));
