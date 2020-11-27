@@ -255,3 +255,27 @@ exports.finishJob = async (req, res) => {
     res.json({ success: "finish workkkk" });
   });
 };
+
+exports.deleteJob = async (req, res) => {
+  const data = req.body;
+  Job.findOneAndDelete({_id : data.jobId, Status: "Ready"}).then((job) => {
+    job.CurrentEmployee.map((user) => {
+      User.findByIdAndUpdate(user.userId, {
+        $pull: {
+          pending: { JobId: job._id },
+        }
+      }).then((user) => {
+        console.log("remove pending");
+      });
+    });
+    job.CurrentAcceptedEmployee.map((user) => {
+      User.findByIdAndUpdate(user.userId, {
+        $pull: {
+          approve: { JobId: job._id },
+        },
+      }).then((user) => console.log("remove approve"));
+    });
+    res.json("delete complete")
+  }
+  );
+};
