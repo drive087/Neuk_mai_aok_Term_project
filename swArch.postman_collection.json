@@ -71,7 +71,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"cat\",\n    \"password\" : \"cat\"\n}",
+					"raw": "{\n    \"email\": \"tiger\",\n    \"password\" : \"tiger\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -140,7 +140,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmMwZDM0MzZkNTk2YjE4NDBhNDljNjYiLCJ1c2VybmFtZSI6ImNhdCIsImlhdCI6MTYwNjQ3MjcxMSwiZXhwIjoxNjM4MDI5NjM3fQ.wBQilT29hInnEuCgZtijbRE2iDCaHm-ckiMAVCloTtk",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmMwZDMzMjZkNTk2YjE4NDBhNDljNjQiLCJ1c2VybmFtZSI6InRpZ2VyIiwiaWF0IjoxNjA2NDc0NTM3LCJleHAiOjE2MzgwMzE0NjN9.8waxRbaVrs9viloZj7N6LSTB1VATPEV0SPrvfZgK1z0",
 							"type": "string"
 						}
 					]
@@ -149,7 +149,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"_id\":\"5fc0d32c6d596b1840a49c63\"\n}",
+					"raw": "{\n    \"_id\":\"5fc0da7d567db91aa10ef3fb\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -188,7 +188,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"jobId\" : \"5fc0d32c6d596b1840a49c63\",\n    \"userId\": \"5fc0d3436d596b1840a49c66\"\n}",
+					"raw": "{\n    \"jobId\" : \"5fc0da7d567db91aa10ef3fb\",\n    \"userId\": \"5fc0d3436d596b1840a49c66\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -352,6 +352,45 @@
 					"path": [
 						"jobs",
 						"finish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteReadyJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmJmZTRlM2QyODZhZDA2NWQxN2I2ZTAiLCJ1c2VybmFtZSI6ImRvZyIsImlhdCI6MTYwNjQxMjY3NSwiZXhwIjoxNjM3OTY5NjAxfQ.hJYRcezN7fovQpkuPFqkZcNiBBj-nwIyONOVYhMcjj8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"jobId\" : \"5fc0da7d567db91aa10ef3fb\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/jobs/deleteJob",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"jobs",
+						"deleteJob"
 					]
 				}
 			},
