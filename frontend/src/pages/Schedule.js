@@ -21,12 +21,17 @@ const Schedule = () => {
   const fetchData = () => {
     getmyJobs()
       .then((res) => {
-        console.log(res.data.approve);
-        console.log(res.data.myJobsCreated);
+        console.log(res.data);
+
         setApprove(res.data.approve);
         setMyJob(res.data.myJobsCreated);
+        const temp = res.data.myJobsCreated
+        const myJobNotDone = temp.filter(
+          (job) => job.Status !== "Done"
+        );
+        console.log(myJobNotDone);
         const newArray = jobs.concat(
-          res.data.myJobsCreated
+          myJobNotDone
             .concat(res.data.approve)
             .concat(res.data.inprogress)
         );
