@@ -51,6 +51,7 @@ const JobManagementPage = () => {
   const [inprogress, setInprogress] = useState([]);
   const [cancel, setCancel] = useState([]);
   const [myJob, setMyJob] = useState([]);
+  const [doneJob, setDoneJob] = useState([])
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -65,11 +66,13 @@ const JobManagementPage = () => {
   const fetchData = () => {
     getmyJobs()
       .then((res) => {
+        console.log(res.data)
         setApprove(res.data.approve);
         setPending(res.data.pending);
         setInprogress(res.data.inprogress);
         setCancel(res.data.cancel);
         setMyJob(res.data.myJobsCreated);
+        setDoneJob(res.data.done)
       })
       .catch((err) => {
         console.log(err);
@@ -94,6 +97,7 @@ const JobManagementPage = () => {
           <Tab label="Pending" />
           <Tab label="Inprogress" />
           <Tab label="Cancel" />
+          <Tab label="Done" />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -125,6 +129,11 @@ const JobManagementPage = () => {
         <TabPanel value={value} index={4}>
           {cancel.map((job) => (
             <JobCard _status={"Cancel"} job={job} key={`${job.JobID}`} />
+          ))}
+        </TabPanel>
+        <TabPanel value={value} index={5}>
+          {doneJob.map((job) => (
+            <JobCard _status={"Done"} job={job} key={`${job.JobID}`} />
           ))}
         </TabPanel>
       </SwipeableViews>
