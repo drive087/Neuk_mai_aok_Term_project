@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const User = require("../models/userModel");
 const keys = require("../config/key");
+const logger = require("../log/logger");
 
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -19,7 +20,7 @@ module.exports = (passport) => {
           }
           return done(null, false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => logger.error(err));
     })
   );
 };

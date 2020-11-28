@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import clsx from "clsx";
 import { fade, makeStyles } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
@@ -27,13 +26,25 @@ const useStyles = makeStyles(() => ({
     color: "#00a86b",
     backgroundColor: fade("#00a86b", 0.2),
   },
-  Inprogess: {
+  Inprogress: {
     color: "#f2ae42",
     backgroundColor: fade("#f2ae42", 0.2),
   },
   Pending: {
     color: "#666666",
     backgroundColor: fade("#666666", 0.2),
+  },
+  Cancel: {
+    color: "#dd3439",
+    backgroundColor: fade("#dd3439", 0.2),
+  },
+  Done: {
+    color: "#00a86b",
+    backgroundColor: fade("#00a86b", 0.2),
+  },
+  Approve: {
+    color: "#128bff",
+    backgroundColor: fade("#128bff", 0.2),
   },
 }));
 

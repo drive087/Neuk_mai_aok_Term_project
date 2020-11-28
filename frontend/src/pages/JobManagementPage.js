@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import {
-  Card,
-  CardContent,
-  CardActions,
-  Button,
   Typography,
   makeStyles,
   Container,
-  Modal,
-  Backdrop,
-  Fade,
-  Paper,
   Tabs,
   Tab,
   AppBar,
   Box,
 } from "@material-ui/core";
-import axios from "axios";
 import JobCard from "../components/JobCard";
 import { getmyJobs } from "../actions/action";
 import SwipeableViews from "react-swipeable-views";
@@ -55,7 +46,6 @@ const TabPanel = (props) => {
   );
 };
 const JobManagementPage = () => {
-  const classes = useStyles();
   const [approve, setApprove] = useState([]);
   const [pending, setPending] = useState([]);
   const [inprogress, setInprogress] = useState([]);
@@ -104,11 +94,11 @@ const JobManagementPage = () => {
           onChange={handleChange}
           aria-label="disabled tabs example"
         >
+          <Tab label="MY Job" />
           <Tab label="Approve" />
           <Tab label="Pending" />
           <Tab label="Inprogress" />
           <Tab label="Cancel" />
-          <Tab label="MY Job" />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -117,28 +107,28 @@ const JobManagementPage = () => {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0}>
-          {approve.map((job) => (
-            <JobCard _status={"Approve"} job={job} />
+          {myJob.map((job) => (
+            <JobCard job={job} isMyJob={true} key={`${job.JobID}`} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          {pending.map((job) => (
-            <JobCard _status={"Pending"} job={job} />
+          {approve.map((job) => (
+            <JobCard _status={"Approve"} job={job} key={`${job.JobID}`} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={2}>
-          {inprogress.map((job) => (
-            <JobCard job={job} />
+          {pending.map((job) => (
+            <JobCard _status={"Pending"} job={job} key={`${job.JobID}`} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={3}>
-          {cancel.map((job) => (
-            <JobCard job={job} />
+          {inprogress.map((job) => (
+            <JobCard _status={"Inprogress"} job={job} key={`${job.JobID}`} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={4}>
-          {myJob.map((job) => (
-            <JobCard job={job} />
+          {cancel.map((job) => (
+            <JobCard _status={"Cancel"} job={job} key={`${job.JobID}`} />
           ))}
         </TabPanel>
       </SwipeableViews>

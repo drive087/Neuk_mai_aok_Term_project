@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
 import {
   Card,
   CardContent,
-  CardActions,
   Button,
   Typography,
   makeStyles,
   Grid,
-  Container,
   CardHeader,
   Modal,
   Backdrop,
   Fade,
 } from "@material-ui/core";
-import axios from "axios";
 import LabelStatus from "../components/LabelStatus";
-import { approvePeople } from "../actions/action";
+import {
+  approvePeople,
+  deleteJobByID,
+  doneJob,
+  rejectJob,
+} from "../actions/action";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -93,21 +94,20 @@ const useStyles = makeStyles({
   },
 });
 
-const JobCard = ({ job, _status }) => {
+const JobCard = ({ job, _status, isMyJob }) => {
   const classes = useStyles();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [jobID, setJobID] = useState(job._id);
-  const [isOpen, setIsOpen] = useState(true);
-  const [jobName, setJobName] = useState(job.JobName);
-  const [wages, setWages] = useState(job.Wages);
-  const [location, setLocation] = useState(job.Location);
-  const [jobDetail, setJobDetail] = useState(job.JobDetail);
-  const [startDate, setStartDate] = useState(job.BeginTime);
-  const [endDate, setEndDate] = useState(job.EndTime);
-  const [amount, setAmount] = useState(job.Amount);
-  const [collaborator, setcollaobrator] = useState(job.CurrentEmployee);
-  const [status, setStatus] = useState(job.Status ? job.Status : _status);
-  const bull = <span className={classes.bullet}>•</span>;
+  const [jobID] = useState(job._id);
+  const [] = useState(true);
+  const [jobName] = useState(job.JobName);
+  const [] = useState(job.Wages);
+  const [location] = useState(job.Location);
+  const [jobDetail] = useState(job.JobDetail);
+  const [startDate] = useState(job.BeginTime);
+  const [endDate] = useState(job.EndTime);
+  const [amount] = useState(job.Amount);
+  const [collaborator] = useState(job.CurrentEmployee);
+  const [status] = useState(job.Status ? job.Status : _status);
 
   const onShowModal = () => {
     setIsModalOpen(true);
@@ -115,16 +115,43 @@ const JobCard = ({ job, _status }) => {
   const handleClose = () => {
     setIsModalOpen(false);
   };
-  useEffect(() => {
-    console.log(job);
-  }, []);
 
   const handleApprove = (userID) => {
-    console.log(jobID);
-    console.log(userID);
     approvePeople({ jobId: jobID, userId: userID });
   };
-  const handleEdit = () => {
+  const handleEdit = () => {};
+  const handleDelete = () => {
+    const req = {
+      jobId: jobID,
+    };
+    deleteJobByID(req)
+      .then(() => alert("Delete Successful"))
+      .catch(() => {
+        alert("Something went wrong");
+      });
+  };
+  const handleDone = () => {
+    const req = {
+      jobId: jobID,
+    };
+    doneJob(req)
+      .then(() => alert("Job is Done"))
+      .catch(() => {
+        alert("Something went wrong");
+      });
+  };
+  const handleReject = (id) => {
+    const req = {
+      jobId: jobID,
+      userId: id,
+    };
+
+    rejectJob(req)
+      .then((res) => alert("Successful"))
+      .catch((err) => {
+        console.log(err);
+        alert("Something went wrong");
+      });
   };
   return (
     <Card className={classes.root}>
@@ -132,33 +159,57 @@ const JobCard = ({ job, _status }) => {
         title={
           <div>
             <LabelStatus status={"STATUS"} />
-            <LabelStatus color={`${_status}`} status={status} />
+            <LabelStatus
+              color={!!job.Status ? job.Status : `${_status}`}
+              status={status}
+            />
           </div>
         }
         subheader={
-          <div className={classes.space}>
-            <Grid container className={classes.space} spacing={2}>
-              <Grid item>
-                <Button className={classes.button_start}>Start</Button>
+          isMyJob && (
+            <div className={classes.space}>
+              <Grid container className={classes.space} spacing={2}>
+                {/* <Grid item>
+                  <Button className={classes.button_start}>Start</Button>
+                </Grid> */}
+                <Grid item>
+                  <Button
+                    className={classes.button_edit}
+                    href={`/EditJob/${jobID}`}
+                    onClick={handleEdit}
+                  >
+                    Edit
+                  </Button>
+                </Grid>
+                {status !== "Inprogress" && (
+                  <Grid item>
+                    <Button
+                      className={classes.button_delete}
+                      onClick={handleDelete}
+                    >
+                      Delete
+                    </Button>
+                  </Grid>
+                )}
+
+                <Grid item>
+                  <Button className={classes.button_show} onClick={onShowModal}>
+                    Show Collaborator
+                  </Button>
+                </Grid>
+                {status !== "Ready" && (
+                  <Grid item>
+                    <Button
+                      className={classes.button_start}
+                      onClick={handleDone}
+                    >
+                      Done
+                    </Button>
+                  </Grid>
+                )}
               </Grid>
-              <Grid item>
-                <Button className={classes.button_edit} href={"/EditJob"} onClick={handleEdit}>
-                  Edit
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button className={classes.button_delete}>Delete</Button>
-              </Grid>
-              <Grid item>
-                <Button className={classes.button_show} onClick={onShowModal}>
-                  Show Collaborator
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button className={classes.button_start}>Done</Button>
-              </Grid>
-            </Grid>
-          </div>
+            </div>
+          )
         }
       />
       <CardContent>
@@ -240,7 +291,7 @@ const JobCard = ({ job, _status }) => {
             <h2 id="transition-modal-title">Collaborator</h2>
             {!!collaborator &&
               collaborator.map((people) => (
-                <Grid container spacing={2}>
+                <Grid key={`key_${people.first_name}`} container spacing={2}>
                   <Grid item>
                     <Typography>{people.first_name}</Typography>
                   </Grid>
@@ -254,7 +305,12 @@ const JobCard = ({ job, _status }) => {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button className={classes.button_delete}>Reject</Button>
+                    <Button
+                      className={classes.button_delete}
+                      onClick={() => handleReject(people.userId)}
+                    >
+                      Reject
+                    </Button>
                   </Grid>
                 </Grid>
               ))}

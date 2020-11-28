@@ -13,12 +13,9 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import Footer from '../components/Footer';
-import Login from '../pages/Login'
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import FirstLanding from './FirstLanding';
-import Register from './Register';
 import Dashboard from './Dashboard';
 import CreateJob from './CreateJob';
 import Schedule from './Schedule';
@@ -175,7 +172,7 @@ export default function PersistentDrawerLeft(props) {
           <Route exact path="/CreateJob" component={CreateJob} />
           <Route exact path="/Schedule" component={Schedule} />
           <Route exact path="/jobmanagement" component={JobManagementPage} />
-          <Route exact path="/EditJob" component={EditJob} />
+          <Route exact path="/EditJob/:id" component={EditJob} />
 
         </div>
       </Router>

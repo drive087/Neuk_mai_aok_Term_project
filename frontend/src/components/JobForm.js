@@ -19,12 +19,7 @@ const JobForm = ({ job }) => {
   const [location, setLocation] = useState(job.Location)
   const [startDate, setStartDate] = useState(job.BeginTime)
   const [endDate, setEndDate] = useState(job.EndTime)
-  
 
-  useEffect(() => {
-    console.log(job)
-  
-  }, []);
   return (
     <Card
       alignItems="center"

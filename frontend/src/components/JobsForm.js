@@ -1,47 +1,39 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
 import {
-  InputLabel,
-  InputBase,
-  Button,
   Grid,
   Container,
   Typography,
 } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
-import DatePicker from "../components/DatePicker";
-import CheckBox from "../components/CheckBox";
-import axios from "axios";
 import JobForm from "./JobForm";
 import AlreadyApplyJobForm from "./AlreadyApplyJobForm";
 import OwnerJobForm from "./OwnerJobForm";
 import { getAllJob } from "../actions/action";
-import { API_HOST } from "../const";
 
-const JobsForm = (props) => {
+const JobsForm = () => {
   const [jobs, setJobs] = useState(null);
 
   useEffect(() => {
     getAllJob().then((data) => {
+      console.log(data)
       setJobs(data)
     });
   }, []);
 
   const renderList = () => {
     if (jobs != null) {
-      return jobs.map((job, key) => {
-        if (job.Employer == localStorage.getItem("username")) {
+      return jobs.map((job) => {
+        if (job.JobOwner == localStorage.getItem("username")) {
           return (
             <Grid item sm={4}>
-              <OwnerJobForm data={job} />
+              <OwnerJobForm job={job} />
             </Grid>
           );
         }
-        if (job.CurrentEmployee.includes(localStorage.getItem("username"))) {
+        if (job.CurrentEmployee && job.CurrentEmployee.map((a)=> a.email).includes(localStorage.getItem("username"))) {
           return (
             <Grid item sm={4}>
-              <AlreadyApplyJobForm data={job} />
+              <AlreadyApplyJobForm job={job} />
             </Grid>
           );
         }
