@@ -12,14 +12,21 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import MyCalendar from "../components/myCalendar";
-import { getAllJob } from "../actions/action";
+import { getAllJob, getmyJobs } from "../actions/action";
 const Schedule = () => {
   const [jobs, setJobs] = useState([]);
+  const [myJob, setMyJob] = useState([]);
+  const [approve, setApprove] = useState([]);
+
   const fetchData = () => {
-    getAllJob()
+    getmyJobs()
       .then((res) => {
-        console.log(res);
-        setJobs(res);
+        console.log(res.data.approve);
+        console.log(res.data.myJobsCreated);
+        setApprove(res.data.approve);
+        setMyJob(res.data.myJobsCreated);
+        const newArray = jobs.concat(res.data.myJobsCreated.concat(res.data.approve).concat(res.data.inprogress))
+        setJobs(newArray);
       })
       .catch((err) => {
         console.log(err);
@@ -47,6 +54,15 @@ const Schedule = () => {
           {jobs.length !== 0 && <MyCalendar jobs={jobs} id={"idkrub"} />}
         </Grid>
       </Grid>
+      <button
+        onClick={() => {
+          console.log(jobs);
+          console.log(myJob);
+          console.log(approve);
+        }}
+      >
+        SAAA
+      </button>
     </Container>
   );
 };
