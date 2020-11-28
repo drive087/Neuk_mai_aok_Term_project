@@ -1,4 +1,3 @@
-import { API_HOST } from "../const";
 import axios from "axios";
 
 // Get All Job
@@ -58,7 +57,7 @@ export const createJob = (job) => {
 // GetMyJob
 export const getmyJobs = () => {
   const api = axios
-    .get(`${API_HOST}/jobs/myjobs`, {
+    .get(`/jobs/myjobs`, {
       headers: { Authorization: `${localStorage.getItem("token")}` },
     })
     .then((res) => {
@@ -75,7 +74,7 @@ export const getmyJobs = () => {
 // Approve People
 export const approvePeople = (body) => {
   const api = axios
-    .post(`${API_HOST}/jobs/approve`, body, {
+    .post(`/jobs/approve`, body, {
       headers: { Authorization: `${localStorage.getItem("token")}` },
     })
     .then((res) => {
@@ -92,7 +91,7 @@ export const approvePeople = (body) => {
 // GetJobByID
 export const getJobByID = (id) => {
   const api = axios
-    .get(`${API_HOST}/jobs/getJobById/${id}`, {
+    .get(`/jobs/getJobById/${id}`, {
       headers: { Authorization: `${localStorage.getItem("token")}` },
     })
     .then((res) => {
@@ -109,7 +108,7 @@ export const getJobByID = (id) => {
 // EditJob
 export const editJob = (job, id) => {
   const api = axios
-    .patch(`${API_HOST}/jobs/updateJob/${id}`, job, {
+    .patch(`/jobs/updateJob/${id}`, job, {
       headers: { Authorization: `${localStorage.getItem("token")}` },
     })
     .then((res) => {
@@ -126,7 +125,7 @@ export const editJob = (job, id) => {
 // DeleteJobByID
 export const deleteJobByID = (jobId) => {
   const api = axios
-    .post(`${API_HOST}/jobs/deleteJob`, jobId, {
+    .post(`/jobs/deleteJob`, jobId, {
       headers: { Authorization: `${localStorage.getItem("token")}` },
     })
     .then((res) => {
@@ -143,7 +142,7 @@ export const deleteJobByID = (jobId) => {
 // JobDone
 export const doneJob = (jobId) => {
   const api = axios
-    .post(`${API_HOST}/jobs/finish`, jobId, {
+    .post(`/jobs/finish`, jobId, {
       headers: { Authorization: `${localStorage.getItem("token")}` },
     })
     .then((res) => {
@@ -160,7 +159,7 @@ export const doneJob = (jobId) => {
 // RejectPeople
 export const rejectJob = (body) => {
   const api = axios
-    .post(`${API_HOST}/jobs/rejectJob`, body, {
+    .post(`/jobs/rejectJob`, body, {
       headers: { Authorization: `${localStorage.getItem("token")}` },
     })
     .then((res) => {

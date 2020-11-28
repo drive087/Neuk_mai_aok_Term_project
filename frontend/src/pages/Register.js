@@ -219,7 +219,7 @@ function Register(props) {
   );
 
   function mongoRegister(data) {
-    fetch("http://localhost:8000/user/signup", {
+    fetch("/user/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
