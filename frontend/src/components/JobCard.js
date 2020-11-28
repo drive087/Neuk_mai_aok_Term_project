@@ -169,9 +169,9 @@ const JobCard = ({ job, _status, isMyJob }) => {
           isMyJob && (
             <div className={classes.space}>
               <Grid container className={classes.space} spacing={2}>
-                <Grid item>
+                {/* <Grid item>
                   <Button className={classes.button_start}>Start</Button>
-                </Grid>
+                </Grid> */}
                 <Grid item>
                   <Button
                     className={classes.button_edit}
@@ -181,24 +181,32 @@ const JobCard = ({ job, _status, isMyJob }) => {
                     Edit
                   </Button>
                 </Grid>
-                <Grid item>
-                  <Button
-                    className={classes.button_delete}
-                    onClick={handleDelete}
-                  >
-                    Delete
-                  </Button>
-                </Grid>
+                {status !== "Inprogress" && (
+                  <Grid item>
+                    <Button
+                      className={classes.button_delete}
+                      onClick={handleDelete}
+                    >
+                      Delete
+                    </Button>
+                  </Grid>
+                )}
+
                 <Grid item>
                   <Button className={classes.button_show} onClick={onShowModal}>
                     Show Collaborator
                   </Button>
                 </Grid>
-                <Grid item>
-                  <Button className={classes.button_start} onClick={handleDone}>
-                    Done
-                  </Button>
-                </Grid>
+                {status !== "Ready" && (
+                  <Grid item>
+                    <Button
+                      className={classes.button_start}
+                      onClick={handleDone}
+                    >
+                      Done
+                    </Button>
+                  </Grid>
+                )}
               </Grid>
             </div>
           )
