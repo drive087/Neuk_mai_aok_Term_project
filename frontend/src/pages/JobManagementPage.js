@@ -107,7 +107,8 @@ const JobManagementPage = () => {
           ))}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          {approve.map((job) => (
+          {
+          approve.map((job) => (
             <JobCard _status={"Approve"} job={job} key={`${job.JobID}`} />
           ))}
         </TabPanel>

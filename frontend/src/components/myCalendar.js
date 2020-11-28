@@ -68,7 +68,7 @@ const MyCalendar = ({ jobs }) => {
   return (
     <div>
       <Calendar
-        views={["month", "week"]}
+        views={["month"]}
         localizer={localizer}
         events={events}
         step={60}
