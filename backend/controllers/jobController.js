@@ -3,7 +3,7 @@ const Job = require("../models/jobModel");
 const User = require("../models/userModel");
 
 exports.getAll = async (req, res, next) => {
-  Job.find()
+  Job.find({Status: "Ready"})
     .then((jobs) => {
       logger.info("GET JOB");
       res.json(jobs);
