@@ -32,22 +32,6 @@ const OwnerJobCardModal = ({ job }) => {
     setModalToggle(!modalToggle);
   };
 
-  const onApplyJob = () => {
-    axios
-      .post(
-        "/jobs/apply",
-        { _id: jobID, employee: localStorage.getItem("username") },
-        {
-          headers: { Authorization: `${localStorage.getItem("token")}` },
-        }
-      )
-      .then((res) => {
-        if (res.status === 200) {
-          // window.location.reload();
-        }
-      });
-  };
-
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Grid
@@ -93,7 +77,7 @@ const OwnerJobCardModal = ({ job }) => {
           disabled="True"
           variant="contained"
           color="primary"
-          onClick={() => onApplyJob()}
+          
         >
           Owner
         </Button>

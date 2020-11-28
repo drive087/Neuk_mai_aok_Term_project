@@ -1,11 +1,6 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
 import { Card, Grid } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
-import DatePicker from "../components/DatePicker";
-import CheckBox from "../components/CheckBox";
-import axios from "axios";
 import MonetizationOnOutlinedIcon from "@material-ui/icons/MonetizationOnOutlined";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import EventOutlinedIcon from "@material-ui/icons/EventOutlined";
@@ -14,12 +9,12 @@ import OwnerJobCardModal from "./OwnerJobCardModal";
 
 const OwnerJobForm = ({job}) => {
   
-  const [jobName, setJobName] = useState(job.JobName);
-  const [wages, setWages] = useState(job.Wages);
-  const [amount, setAmount] = useState(job.Amount);
-  const [location, setLocation] = useState(job.Location);
-  const [startDate, setStartDate] = useState(job.BeginTime);
-  const [endDate, setEndDate] = useState(job.EndTime);
+  const [jobName] = useState(job.JobName);
+  const [wages] = useState(job.Wages);
+  const [] = useState(job.Amount);
+  const [location] = useState(job.Location);
+  const [startDate] = useState(job.BeginTime);
+  const [endDate] = useState(job.EndTime);
 
   return (
     <Card

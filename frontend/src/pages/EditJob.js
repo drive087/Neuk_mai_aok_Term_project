@@ -1,20 +1,15 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter, useParams } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
-import { InputLabel, InputBase, Button, Grid } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { Button, Grid } from "@material-ui/core";
 import DatePicker from "../components/DatePicker";
-import CheckBox from "../components/CheckBox";
-import axios from "axios";
-import { createJob, getJobByID, editJob } from "../actions/action";
+import { getJobByID, editJob } from "../actions/action";
 
 const EditJob = (props) => {
   const today = new Date();
   const currentDate = new Date().toISOString();
   const currentDay = currentDate.substr(0, 10);
-  const currentTime = today.toTimeString().substr(0, 5);
   today.setHours(today.getHours() + 1);
-  const nextTime = today.toTimeString().substr(0, 5);
 
   const [jobName, setJobName] = useState(null);
   const [jobDetail, setJobDetail] = useState(null);
@@ -23,7 +18,7 @@ const EditJob = (props) => {
   const [location, setLocation] = useState(null);
   const [beginTime, setBeginTime] = useState(null);
   const [endTime, setEndtime] = useState(null);
-  const [date, setDate] = useState(currentDay);
+  const [] = useState(currentDay);
   const { id } = useParams();
   const [job, setJob] = useState({});
 
@@ -76,7 +71,7 @@ const EditJob = (props) => {
       alert("StartDate , EndDate");
     } else {
       console.log(data)
-      editJob(data,id).then((res) => {
+      editJob(data,id).then(() => {
         props.history.push({ pathname: "/" });
       });
     }

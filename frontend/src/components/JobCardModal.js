@@ -7,7 +7,6 @@ import { applyJob } from "../actions/action";
 
 const JobCardModal = ({ job }) => {
   const [modalToggle, setModalToggle] = useState(false);
-  
   const [jobName, setJobName] = useState(job.JobName)
   const [jobDetail, setJobDetail] = useState(job.JobDetail)
   const [wages, setWages] = useState(job.Wages)
@@ -28,15 +27,11 @@ const JobCardModal = ({ job }) => {
     },
   };
 
-  useEffect(() => {
-    console.log(job)
-  }, [])
   const onModalToggle = () => {
     setModalToggle(!modalToggle);
   };
 
   const onApplyJob = () => {
-    console.log(job._id);
     applyJob(job._id)
       .then((res) => setModalToggle(false))
       .catch((err) => {
