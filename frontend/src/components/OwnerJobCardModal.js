@@ -76,8 +76,7 @@ const OwnerJobCardModal = ({ job }) => {
         <Button
           disabled="True"
           variant="contained"
-          color="primary"
-          
+          color="primary"   
         >
           Owner
         </Button>

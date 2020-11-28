@@ -15,6 +15,7 @@ const JobsForm = () => {
 
   useEffect(() => {
     getAllJob().then((data) => {
+      console.log(data)
       setJobs(data)
     });
   }, []);
@@ -29,10 +30,10 @@ const JobsForm = () => {
             </Grid>
           );
         }
-        if (jobs[1].CurrentEmployee.map((a)=> a.email).includes(localStorage.getItem("username"))) {
+        if (job.CurrentEmployee && job.CurrentEmployee.map((a)=> a.email).includes(localStorage.getItem("username"))) {
           return (
             <Grid item sm={4}>
-              <AlreadyApplyJobForm data={job} />
+              <AlreadyApplyJobForm job={job} />
             </Grid>
           );
         }

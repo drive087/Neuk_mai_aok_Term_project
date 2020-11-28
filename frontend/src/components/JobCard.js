@@ -12,7 +12,12 @@ import {
   Fade,
 } from "@material-ui/core";
 import LabelStatus from "../components/LabelStatus";
-import { approvePeople, deleteJobByID, doneJob } from "../actions/action";
+import {
+  approvePeople,
+  deleteJobByID,
+  doneJob,
+  rejectJob,
+} from "../actions/action";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -132,6 +137,18 @@ const JobCard = ({ job, _status, isMyJob }) => {
     doneJob(req)
       .then(() => alert("Job is Done"))
       .catch(() => {
+        alert("Something went wrong");
+      });
+  };
+  const handleReject = (id) => {
+    const req = {
+      jobId: jobID,
+      userId: id,
+    };
+    rejectJob(req)
+      .then((res) => alert("Successful"))
+      .catch((err) => {
+        console.log(err);
         alert("Something went wrong");
       });
   };
@@ -279,7 +296,12 @@ const JobCard = ({ job, _status, isMyJob }) => {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button className={classes.button_delete}>Reject</Button>
+                    <Button
+                      className={classes.button_delete}
+                      onClick={() => handleReject(people._id)}
+                    >
+                      Reject
+                    </Button>
                   </Grid>
                 </Grid>
               ))}

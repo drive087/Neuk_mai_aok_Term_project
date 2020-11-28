@@ -155,4 +155,21 @@ export const doneJob = (jobId) => {
       return err;
     });
   return api;
-}
+};
+
+// RejectPeople
+export const rejectJob = (body) => {
+  const api = axios
+    .post(`${API_HOST}/jobs/rejectJob`, body, {
+      headers: { Authorization: `${localStorage.getItem("token")}` },
+    })
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .then((err) => {
+      console.log(err);
+      return err;
+    });
+  return api;
+};
