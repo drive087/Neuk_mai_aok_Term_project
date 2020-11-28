@@ -54,7 +54,7 @@ export const createJob = (job) => {
   return api;
 };
 
-// GetMyJob
+// GetMyJob and Job is applied
 export const getmyJobs = () => {
   const api = axios
     .get(`/jobs/myjobs`, {
