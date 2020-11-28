@@ -126,7 +126,7 @@ export const editJob = (job, id) => {
 // DeleteJobByID
 export const deleteJobByID = (jobId) => {
   const api = axios
-    .delete(`${API_HOST}/jobs/deleteJob`, jobId, {
+    .post(`${API_HOST}/jobs/deleteJob`, jobId, {
       headers: { Authorization: `${localStorage.getItem("token")}` },
     })
     .then((res) => {

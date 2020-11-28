@@ -93,7 +93,7 @@ const useStyles = makeStyles({
   },
 });
 
-const JobCard = ({ job, _status }) => {
+const JobCard = ({ job, _status, isMyJob }) => {
   const classes = useStyles();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [jobID, setJobID] = useState(job._id);
@@ -153,44 +153,49 @@ const JobCard = ({ job, _status }) => {
         title={
           <div>
             <LabelStatus status={"STATUS"} />
-            <LabelStatus color={`${_status}`} status={status} />
+            <LabelStatus
+              color={!!job.Status ? job.Status : `${_status}`}
+              status={status}
+            />
           </div>
         }
         subheader={
-          <div className={classes.space}>
-            <Grid container className={classes.space} spacing={2}>
-              <Grid item>
-                <Button className={classes.button_start}>Start</Button>
+          isMyJob && (
+            <div className={classes.space}>
+              <Grid container className={classes.space} spacing={2}>
+                <Grid item>
+                  <Button className={classes.button_start}>Start</Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    className={classes.button_edit}
+                    href={`/EditJob/${jobID}`}
+                    onClick={handleEdit}
+                  >
+                    Edit
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    className={classes.button_delete}
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button className={classes.button_show} onClick={onShowModal}>
+                    Show Collaborator
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button className={classes.button_start} onClick={handleDone}>
+                    Done
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Button
-                  className={classes.button_edit}
-                  href={`/EditJob/${jobID}`}
-                  onClick={handleEdit}
-                >
-                  Edit
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  className={classes.button_delete}
-                  onClick={handleDelete}
-                >
-                  Delete
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button className={classes.button_show} onClick={onShowModal}>
-                  Show Collaborator
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button className={classes.button_start} onClick={handleDone}>
-                  Done
-                </Button>
-              </Grid>
-            </Grid>
-          </div>
+            </div>
+          )
         }
       />
       <CardContent>

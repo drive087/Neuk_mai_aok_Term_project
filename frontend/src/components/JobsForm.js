@@ -24,6 +24,7 @@ const JobsForm = (props) => {
 
   useEffect(() => {
     getAllJob().then((data) => {
+      console.log(data)
       setJobs(data)
     });
   }, []);
@@ -31,14 +32,14 @@ const JobsForm = (props) => {
   const renderList = () => {
     if (jobs != null) {
       return jobs.map((job, key) => {
-        if (job.Employer == localStorage.getItem("username")) {
+        if (job.JobOwner == localStorage.getItem("username")) {
           return (
             <Grid item sm={4}>
-              <OwnerJobForm data={job} />
+              <OwnerJobForm job={job} />
             </Grid>
           );
         }
-        if (job.CurrentEmployee.includes(localStorage.getItem("username"))) {
+        if (jobs[1].CurrentEmployee.map((a)=> a.email).includes(localStorage.getItem("username"))) {
           return (
             <Grid item sm={4}>
               <AlreadyApplyJobForm data={job} />
