@@ -149,7 +149,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"_id\":\"5fc0da7d567db91aa10ef3fb\"\n}",
+					"raw": "{\n    \"_id\":\"5fc1a5be71188f4afcbd5a41\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -391,6 +391,45 @@
 					"path": [
 						"jobs",
 						"deleteJob"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RejectJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmMwZDMzMjZkNTk2YjE4NDBhNDljNjQiLCJ1c2VybmFtZSI6InRpZ2VyIiwiaWF0IjoxNjA2NDc0NTM3LCJleHAiOjE2MzgwMzE0NjN9.8waxRbaVrs9viloZj7N6LSTB1VATPEV0SPrvfZgK1z0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"jobId\": \"5fc1a5be71188f4afcbd5a41\",\n    \"userId\": \"5fc0d3326d596b1840a49c64\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/jobs/rejectJob",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"jobs",
+						"rejectJob"
 					]
 				}
 			},
