@@ -20,8 +20,14 @@ import {
 } from "../actions/action";
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
-    margin: 15,
+    // minWidth: 275,
+    // margin: 15,
+    marginBottom: "10px",
+    height: "290px",
+    backgroundColor: "#EFEFEF",
+    opacity: "100%",
+    borderRadius: "0.5%",
+    alignItems: "center",
   },
   bullet: {
     display: "inline-block",
@@ -98,9 +104,7 @@ const JobCard = ({ job, _status, isMyJob }) => {
   const classes = useStyles();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [jobID] = useState(job._id);
-  const [] = useState(true);
   const [jobName] = useState(job.JobName);
-  const [] = useState(job.Wages);
   const [location] = useState(job.Location);
   const [jobDetail] = useState(job.JobDetail);
   const [startDate] = useState(job.BeginTime);

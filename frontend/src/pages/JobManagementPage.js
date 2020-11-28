@@ -65,11 +65,6 @@ const JobManagementPage = () => {
   const fetchData = () => {
     getmyJobs()
       .then((res) => {
-        console.log(res.data.approve);
-        console.log(res.data.pending);
-        console.log(res.data.inprogress);
-        console.log(res.data.cancel);
-        console.log(res.data.myJobsCreated);
         setApprove(res.data.approve);
         setPending(res.data.pending);
         setInprogress(res.data.inprogress);

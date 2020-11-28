@@ -25,7 +25,11 @@ const Schedule = () => {
         console.log(res.data.myJobsCreated);
         setApprove(res.data.approve);
         setMyJob(res.data.myJobsCreated);
-        const newArray = jobs.concat(res.data.myJobsCreated.concat(res.data.approve).concat(res.data.inprogress))
+        const newArray = jobs.concat(
+          res.data.myJobsCreated
+            .concat(res.data.approve)
+            .concat(res.data.inprogress)
+        );
         setJobs(newArray);
       })
       .catch((err) => {
@@ -52,17 +56,9 @@ const Schedule = () => {
           }}
         >
           {jobs.length !== 0 && <MyCalendar jobs={jobs} id={"idkrub"} />}
+          {jobs.length === 0 && <MyCalendar jobs={[]} id={"idkrub"} />}
         </Grid>
       </Grid>
-      <button
-        onClick={() => {
-          console.log(jobs);
-          console.log(myJob);
-          console.log(approve);
-        }}
-      >
-        SAAA
-      </button>
     </Container>
   );
 };

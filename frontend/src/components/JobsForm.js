@@ -25,20 +25,20 @@ const JobsForm = () => {
       return jobs.map((job) => {
         if (job.JobOwner == localStorage.getItem("username")) {
           return (
-            <Grid item sm={4}>
+            <Grid item xs={12} sm={6} lg={4} md={4}>
               <OwnerJobForm job={job} />
             </Grid>
           );
         }
         if (job.CurrentEmployee && job.CurrentEmployee.map((a)=> a.email).includes(localStorage.getItem("username"))) {
           return (
-            <Grid item sm={4}>
+            <Grid item xs={12} sm={6} lg={4} md={4}>
               <AlreadyApplyJobForm job={job} />
             </Grid>
           );
         }
         return (
-          <Grid item sm={4}>
+          <Grid item xs={12} sm={6} lg={4} md={4}>
             <JobForm job={job} />
           </Grid>
         );
