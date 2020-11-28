@@ -1,14 +1,14 @@
-const express = require("express");
-const bcrypt = require("bcryptjs");
+const logger = require("../log/logger");
 const Job = require("../models/jobModel");
 const User = require("../models/userModel");
 
 exports.getAll = async (req, res, next) => {
   Job.find()
     .then((jobs) => {
+      logger.info("GET JOB")
       res.json(jobs);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => logger.error(err));
 };
 
 exports.newJob = async (req, res) => {
@@ -30,17 +30,22 @@ exports.newJob = async (req, res) => {
   });
   newJob
     .save()
-    .then((job) => res.json(job))
-    .catch((err) => console.log(err));
+    .then((job) => {
+      logger.info("CREATE NEW JOB SUCCESSFUL: ", job.JobName)
+      res.json(job)
+    })
+    .catch((err) => logger.error(err));
 };
 
 exports.getJobById = async (req, res) => {
   const jobId = req.param("id");
   Job.findById(jobId)
     .then((job) => {
+      logger.info("CREATE JOB SUCCESSFUL: ", jobId)
       res.status(200).json(job);
     })
     .catch((err) => {
+      logger.warn("NOT FOUND JOBID: ", jobId)
       res.status(404).json({ ErrorMessage: "Not Found this Job ID" });
     });
 };
@@ -49,9 +54,11 @@ exports.editJob = async (req, res) => {
   const jobId = req.param("id");
   Job.findByIdAndUpdate(jobId, req.body)
     .then((job) => {
+      logger.info("EDIT JOB SUCCESSFUL: ", job.JobName)
       res.status(201).json({ Success: "Update Job success" });
     })
     .catch((err) => {
+      logger.error("NOT FOUND JOBID: ", jobId)
       res.status(404).json({ ErrorMessage: "Not Found this Job ID" });
     });
 };
@@ -97,15 +104,17 @@ exports.apply = async (req, res) => {
               },
             }
           ).then((user) => {
+            logger.info("UPDATE JOB SUCCESSFUL")
             res.status(200).json(user);
           });
           res.status(200).json("Ok");
         })
         .catch((err) => {
+          logger.error("NOT FOUND JOB: ", err)
           res.status(404).json({ ErrorMessage: "Not found Job" });
-          console.log(err);
         });
     } else {
+      logger.error("NOT FOUND USER")
       res.status(404).json({ ErrorMessage: "Not found user" });
     }
   });
@@ -179,7 +188,7 @@ exports.approve = async (req, res) => {
                       },
                     },
                   }).then((user) => {
-                    console.log("finish cancel");
+                    logger.error("FINISH CANCLE")
                   });
                 });
                 job.CurrentAcceptedEmployee.map((user) => {
@@ -200,82 +209,100 @@ exports.approve = async (req, res) => {
                         EndTime: job.EndTime,
                       },
                     },
-                  }).then((user) => console.log("finish inprogress"));
+                  }).then((user) =>
+                    logger.info("FINISH IN PROGRESS"));
                 });
               })
               .catch((err) => {
+                logger.error("NOT FOUND JOB", err)
                 res.json(err);
               });
           }
           res.status(200).json(user);
         });
+        logger.info("APPROVED")
         res.status(200).json("Ok");
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        logger.error("NOT FOUND JOB", err));
   });
 };
 
 exports.getMyJobs = async (req, res) => {
   User.findById(req.userInfo._id).then((user) => {
-    Job.find({ JobOwner: user.email }).then((jobs) => {
-      res.status(200).json({
-        pending: user.pending,
-        inprogress: user.inprogress,
-        cancel: user.cancel,
-        approve: user.approve,
-        myJobsCreated: jobs,
-      });
-    });
+    Job.find({ JobOwner: user.email })
+      .then((jobs) => {
+        logger.info("GET JOB", req.userInfo._id)
+        res.status(200).json({
+          pending: user.pending,
+          inprogress: user.inprogress,
+          cancel: user.cancel,
+          approve: user.approve,
+          myJobsCreated: jobs,
+        });
+      })
+      .catch(err => {
+        logger.error("NOT FOUND JOBID")
+      })
   });
 };
 
 exports.finishJob = async (req, res) => {
   const data = req.body;
-  Job.findByIdAndUpdate(data.jobId, { Status: "Done" }).then((job) => {
-    job.CurrentAcceptedEmployee.map((user) => {
-      User.findByIdAndUpdate(user.userId, {
-        $pull: {
-          inprogress: { JobId: job._id },
-        },
-        $push: {
-          done: {
-            JobId: job._id,
-            JobName: job.JobName,
-            JobDetail: job.JobDetail,
-            JobOwner: job.JobOwner,
-            Wages: job.Wages,
-            Amount: job.Amount,
-            Location: job.Location,
-            BeginTime: job.BeginTime,
-            EndTime: job.EndTime,
+  Job.findByIdAndUpdate(data.jobId, { Status: "Done" })
+    .then((job) => {
+      job.CurrentAcceptedEmployee.map((user) => {
+        User.findByIdAndUpdate(user.userId, {
+          $pull: {
+            inprogress: { JobId: job._id },
           },
-        },
-      }).then((user) => console.log("finish done"));
-    });
-    res.json({ success: "finish workkkk" });
-  });
+          $push: {
+            done: {
+              JobId: job._id,
+              JobName: job.JobName,
+              JobDetail: job.JobDetail,
+              JobOwner: job.JobOwner,
+              Wages: job.Wages,
+              Amount: job.Amount,
+              Location: job.Location,
+              BeginTime: job.BeginTime,
+              EndTime: job.EndTime,
+            },
+          },
+        }).then((user) => logger.info("UPDATE USER COMPLETE"));
+      });
+      logger.info("FINISH WORK")
+      res.json({ success: "finish workkkk" });
+    })
+    .catch(err => {
+      logger.error("NOT FOUND JOBID: ", err)
+    })
 };
 
 exports.deleteJob = async (req, res) => {
   const data = req.body;
-  Job.findOneAndDelete({_id : data.jobId, Status: "Ready"}).then((job) => {
-    job.CurrentEmployee.map((user) => {
-      User.findByIdAndUpdate(user.userId, {
-        $pull: {
-          pending: { JobId: job._id },
-        }
-      }).then((user) => {
-        console.log("remove pending");
+  Job.findOneAndDelete({ _id: data.jobId, Status: "Ready" })
+    .then((job) => {
+      job.CurrentEmployee.map((user) => {
+        User.findByIdAndUpdate(user.userId, {
+          $pull: {
+            pending: { JobId: job._id },
+          }
+        }).then((user) => {
+          logger.info("REMOVE PENDING")
+        });
       });
-    });
-    job.CurrentAcceptedEmployee.map((user) => {
-      User.findByIdAndUpdate(user.userId, {
-        $pull: {
-          approve: { JobId: job._id },
-        },
-      }).then((user) => console.log("remove approve"));
-    });
-    res.json("delete complete")
-  }
-  );
+      job.CurrentAcceptedEmployee.map((user) => {
+        User.findByIdAndUpdate(user.userId, {
+          $pull: {
+            approve: { JobId: job._id },
+          },
+        }).then((user) => logger.info("REMOVE APPROVED"));
+      });
+      logger.info("DELETE COMPLETE")
+      res.json("delete complete")
+    })
+    .catch(err => {
+      logger.error("NOT FOUND JOB: ", err)
+    })
 };

@@ -1,11 +1,8 @@
-const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const keys = require("../config/key");
+const logger = require("../log/logger");
 const User = require("../models/userModel");
 
-exports.signup =  async (req, res, next) => {
+exports.signup = async (req, res, next) => {
 
   User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
@@ -32,7 +29,7 @@ exports.signup =  async (req, res, next) => {
           newUser
             .save()
             .then((user) => res.json(user.email))
-            .catch((err) => console.log(err));
+            .catch((err) => logger.error("SIGUN UP USER FAILED!"));
         });
       });
     }

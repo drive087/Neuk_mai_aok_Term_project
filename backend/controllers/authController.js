@@ -1,8 +1,7 @@
-const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/key");
+const logger = require("../log/logger");
 
 // Load input validation
 // const validateRegisterInput = require("../../validation/register");
@@ -32,7 +31,7 @@ exports.login = async (req, res, next) => {
   const password = req.body.password;
 
   User.find({}).then((user) => {
-    console.log(user)
+    logger.info("FIND ALL USER")
   })
   // Find user by email
   User.findOne({ email }).then((user) => {
