@@ -175,14 +175,12 @@ const JobCard = ({ job, _status, isMyJob }) => {
           isMyJob && (
             <div className={classes.space}>
               <Grid container className={classes.space} spacing={2}>
-                {/* <Grid item>
-                  <Button className={classes.button_start}>Start</Button>
-                </Grid> */}
                 <Grid item>
                   <Button
                     className={classes.button_edit}
                     href={`/EditJob/${jobID}`}
                     onClick={handleEdit}
+                    disabled={job.Status === "Done"}
                   >
                     Edit
                   </Button>
@@ -192,6 +190,7 @@ const JobCard = ({ job, _status, isMyJob }) => {
                     <Button
                       className={classes.button_delete}
                       onClick={handleDelete}
+                      disabled={job.Status === "Done"}
                     >
                       Delete
                     </Button>
@@ -199,7 +198,11 @@ const JobCard = ({ job, _status, isMyJob }) => {
                 )}
 
                 <Grid item>
-                  <Button className={classes.button_show} onClick={onShowModal}>
+                  <Button
+                    className={classes.button_show}
+                    onClick={onShowModal}
+                    disabled={job.Status === "Done"}
+                  >
                     Show Collaborator
                   </Button>
                 </Grid>
@@ -208,6 +211,7 @@ const JobCard = ({ job, _status, isMyJob }) => {
                     <Button
                       className={classes.button_start}
                       onClick={handleDone}
+                      disabled={job.Status === "Done"}
                     >
                       Done
                     </Button>
