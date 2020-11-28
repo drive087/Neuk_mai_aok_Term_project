@@ -7,7 +7,8 @@ import DatePicker from "../components/DatePicker";
 import CheckBox from "../components/CheckBox";
 import axios from "axios";
 import { createJob } from "../actions/action";
-const CreateJob = (props) => {
+
+const EditJob = (props) => {
   const today = new Date();
   const currentDate = new Date().toISOString();
   const currentDay = currentDate.substr(0, 10);
@@ -83,7 +84,7 @@ const CreateJob = (props) => {
     <div
       style={{ marginTop: "100px", marginBottom: "100px", paddingLeft: "25%" }}
     >
-      <h1>Create Job</h1>
+      <h1>Edit Job</h1>
       <form>
         <Grid xs={12} md={8}>
           <Grid
@@ -202,4 +203,4 @@ const CreateJob = (props) => {
   );
 };
 
-export default withRouter(CreateJob);
+export default withRouter(EditJob);

@@ -16,6 +16,7 @@ import Login from '../pages/Login'
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import FirstLanding from './FirstLanding';
 import Register from './Register';
+import EditJob from "./EditJob"
 
 const drawerWidth = 240;
 
