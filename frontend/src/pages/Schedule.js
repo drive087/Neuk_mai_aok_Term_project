@@ -54,15 +54,6 @@ const Schedule = () => {
           {jobs.length !== 0 && <MyCalendar jobs={jobs} id={"idkrub"} />}
         </Grid>
       </Grid>
-      <button
-        onClick={() => {
-          console.log(jobs);
-          console.log(myJob);
-          console.log(approve);
-        }}
-      >
-        SAAA
-      </button>
     </Container>
   );
 };
