@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import LabelStatus from "../components/LabelStatus";
-import { approvePeople } from "../actions/action";
+import { approvePeople, deleteJobByID, doneJob } from "../actions/action";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -124,7 +124,28 @@ const JobCard = ({ job, _status }) => {
     console.log(userID);
     approvePeople({ jobId: jobID, userId: userID });
   };
-  const handleEdit = () => {
+  const handleEdit = () => {};
+  const handleDelete = () => {
+    console.log(jobID);
+    const req = {
+      jobId: jobID,
+    };
+    deleteJobByID(req)
+      .then((res) => alert("Delete Successful"))
+      .catch((err) => {
+        alert("Something went wrong");
+      });
+  };
+  const handleDone = () => {
+    console.log(jobID);
+    const req = {
+      jobId: jobID,
+    };
+    doneJob(req)
+      .then((res) => alert("Job is Done"))
+      .catch((err) => {
+        alert("Something went wrong");
+      });
   };
   return (
     <Card className={classes.root}>
@@ -142,12 +163,21 @@ const JobCard = ({ job, _status }) => {
                 <Button className={classes.button_start}>Start</Button>
               </Grid>
               <Grid item>
-                <Button className={classes.button_edit} href={"/EditJob"} onClick={handleEdit}>
+                <Button
+                  className={classes.button_edit}
+                  href={`/EditJob/${jobID}`}
+                  onClick={handleEdit}
+                >
                   Edit
                 </Button>
               </Grid>
               <Grid item>
-                <Button className={classes.button_delete}>Delete</Button>
+                <Button
+                  className={classes.button_delete}
+                  onClick={handleDelete}
+                >
+                  Delete
+                </Button>
               </Grid>
               <Grid item>
                 <Button className={classes.button_show} onClick={onShowModal}>
@@ -155,7 +185,9 @@ const JobCard = ({ job, _status }) => {
                 </Button>
               </Grid>
               <Grid item>
-                <Button className={classes.button_start}>Done</Button>
+                <Button className={classes.button_start} onClick={handleDone}>
+                  Done
+                </Button>
               </Grid>
             </Grid>
           </div>
