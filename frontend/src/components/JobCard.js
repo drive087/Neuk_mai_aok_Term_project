@@ -145,6 +145,7 @@ const JobCard = ({ job, _status, isMyJob }) => {
       jobId: jobID,
       userId: id,
     };
+
     rejectJob(req)
       .then((res) => alert("Successful"))
       .catch((err) => {
@@ -298,7 +299,7 @@ const JobCard = ({ job, _status, isMyJob }) => {
                   <Grid item>
                     <Button
                       className={classes.button_delete}
-                      onClick={() => handleReject(people._id)}
+                      onClick={() => handleReject(people.userId)}
                     >
                       Reject
                     </Button>

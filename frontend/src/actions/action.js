@@ -65,7 +65,7 @@ export const getmyJobs = () => {
       console.log(res);
       return res;
     })
-    .then((err) => {
+    .catch((err) => {
       console.log(err);
       return err;
     });
@@ -82,7 +82,7 @@ export const approvePeople = (body) => {
       console.log(res);
       return res;
     })
-    .then((err) => {
+    .catch((err) => {
       console.log(err);
       return err;
     });
@@ -116,7 +116,7 @@ export const editJob = (job, id) => {
       console.log(res);
       return res;
     })
-    .then((err) => {
+    .catch((err) => {
       console.log(err);
       return err;
     });
@@ -133,7 +133,7 @@ export const deleteJobByID = (jobId) => {
       console.log(res);
       return res;
     })
-    .then((err) => {
+    .catch((err) => {
       console.log(err);
       return err;
     });
@@ -150,7 +150,7 @@ export const doneJob = (jobId) => {
       console.log(res);
       return res;
     })
-    .then((err) => {
+    .catch((err) => {
       console.log(err);
       return err;
     });
@@ -167,7 +167,7 @@ export const rejectJob = (body) => {
       console.log(res);
       return res;
     })
-    .then((err) => {
+    .catch((err) => {
       console.log(err);
       return err;
     });
