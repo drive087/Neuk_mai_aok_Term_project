@@ -79,7 +79,7 @@ function Login(props) {
     <div>
         return (
       <div>
-        <Grid xs={12} md={4} style={{ minHeight: '400px',marginLeft:'auto',marginRight:'auto',marginTop:'100px'}}>
+        <Grid xs={12} md={4} style={{ minHeight: '400px',marginLeft:'auto',marginRight:'auto',marginTop:'15%'}}>
           <Grid direction='column' alignItems="center" justify="center" >
             <h1>Login CU PART-TIME</h1>
             <Grid item><TextField color="primary" size="small" className="input" id="email" label="email" variant="outlined" fullWidth onChange={event =>setEmail(event.target.value)} value={email}/></Grid>

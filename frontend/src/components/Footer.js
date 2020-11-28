@@ -8,7 +8,7 @@ import '../pages/style.css';
 function Footer(props) {
     
     return (
-        <div style={{marginTop:'3%'}}>
+        <div style={{position:'absolute',bottom:'0', paddingTop:'5%'}}>
         <Paper square elevation={0} fullWidth style={{ backgroundColor: '#191e25', marginTop:'48px' }}>
             <Grid container style={{ width: 'auto'}} id='FooterGrid'>
                 <Grid container id="FooterGrid1" item xs={12} sm={12} md={6}>
@@ -21,12 +21,6 @@ function Footer(props) {
                     </Grid>
                 </Grid>
                 <Grid id="FooterGrid2" item xs={12} sm={12} md={6}>
-                    {/* <Grid item>
-                        <h1 id='white'>Contact Us</h1>
-                        <img className='iconSocF' src={facebookIcon} />
-                        <img className='iconSocF' src={lineIcon} />
-                        <img className='iconSocF' src={youtubeIcon} />
-                    </Grid> */}
                     <Grid item id='white'>
                         <h2>Address: </h2>
                         <p>254 Phayathai Rd., Wang Mai, Pathum Wan District, Bangkok 10330<br/>Call : 080-778-890</p>
