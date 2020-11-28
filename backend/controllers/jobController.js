@@ -236,6 +236,7 @@ exports.getMyJobs = async (req, res) => {
           inprogress: user.inprogress,
           cancel: user.cancel,
           approve: user.approve,
+          done: user.done,
           myJobsCreated: jobs,
         });
       })
