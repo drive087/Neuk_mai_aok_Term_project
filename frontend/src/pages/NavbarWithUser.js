@@ -175,7 +175,7 @@ export default function PersistentDrawerLeft(props) {
           <Route exact path="/CreateJob" component={CreateJob} />
           <Route exact path="/Schedule" component={Schedule} />
           <Route exact path="/jobmanagement" component={JobManagementPage} />
-          <Route exact path="/EditJob" component={EditJob} />
+          <Route exact path="/EditJob/:id" component={EditJob} />
 
         </div>
       </Router>

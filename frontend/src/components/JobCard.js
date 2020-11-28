@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import LabelStatus from "../components/LabelStatus";
-import { approvePeople } from "../actions/action";
+import { approvePeople, deleteJobByID, doneJob } from "../actions/action";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -93,7 +93,7 @@ const useStyles = makeStyles({
   },
 });
 
-const JobCard = ({ job, _status }) => {
+const JobCard = ({ job, _status, isMyJob }) => {
   const classes = useStyles();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [jobID, setJobID] = useState(job._id);
@@ -124,7 +124,28 @@ const JobCard = ({ job, _status }) => {
     console.log(userID);
     approvePeople({ jobId: jobID, userId: userID });
   };
-  const handleEdit = () => {
+  const handleEdit = () => {};
+  const handleDelete = () => {
+    console.log(jobID);
+    const req = {
+      jobId: jobID,
+    };
+    deleteJobByID(req)
+      .then((res) => alert("Delete Successful"))
+      .catch((err) => {
+        alert("Something went wrong");
+      });
+  };
+  const handleDone = () => {
+    console.log(jobID);
+    const req = {
+      jobId: jobID,
+    };
+    doneJob(req)
+      .then((res) => alert("Job is Done"))
+      .catch((err) => {
+        alert("Something went wrong");
+      });
   };
   return (
     <Card className={classes.root}>
@@ -132,33 +153,49 @@ const JobCard = ({ job, _status }) => {
         title={
           <div>
             <LabelStatus status={"STATUS"} />
-            <LabelStatus color={`${_status}`} status={status} />
+            <LabelStatus
+              color={!!job.Status ? job.Status : `${_status}`}
+              status={status}
+            />
           </div>
         }
         subheader={
-          <div className={classes.space}>
-            <Grid container className={classes.space} spacing={2}>
-              <Grid item>
-                <Button className={classes.button_start}>Start</Button>
+          isMyJob && (
+            <div className={classes.space}>
+              <Grid container className={classes.space} spacing={2}>
+                <Grid item>
+                  <Button className={classes.button_start}>Start</Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    className={classes.button_edit}
+                    href={`/EditJob/${jobID}`}
+                    onClick={handleEdit}
+                  >
+                    Edit
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    className={classes.button_delete}
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button className={classes.button_show} onClick={onShowModal}>
+                    Show Collaborator
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button className={classes.button_start} onClick={handleDone}>
+                    Done
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Button className={classes.button_edit} href={"/EditJob"} onClick={handleEdit}>
-                  Edit
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button className={classes.button_delete}>Delete</Button>
-              </Grid>
-              <Grid item>
-                <Button className={classes.button_show} onClick={onShowModal}>
-                  Show Collaborator
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button className={classes.button_start}>Done</Button>
-              </Grid>
-            </Grid>
-          </div>
+            </div>
+          )
         }
       />
       <CardContent>

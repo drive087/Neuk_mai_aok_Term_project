@@ -88,3 +88,71 @@ export const approvePeople = (body) => {
     });
   return api;
 };
+
+// GetJobByID
+export const getJobByID = (id) => {
+  const api = axios
+    .get(`${API_HOST}/jobs/getJobById/${id}`, {
+      headers: { Authorization: `${localStorage.getItem("token")}` },
+    })
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .then((err) => {
+      console.log(err);
+      return err;
+    });
+  return api;
+};
+
+// EditJob
+export const editJob = (job, id) => {
+  const api = axios
+    .patch(`${API_HOST}/jobs/updateJob/${id}`, job, {
+      headers: { Authorization: `${localStorage.getItem("token")}` },
+    })
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .then((err) => {
+      console.log(err);
+      return err;
+    });
+  return api;
+};
+
+// DeleteJobByID
+export const deleteJobByID = (jobId) => {
+  const api = axios
+    .post(`${API_HOST}/jobs/deleteJob`, jobId, {
+      headers: { Authorization: `${localStorage.getItem("token")}` },
+    })
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .then((err) => {
+      console.log(err);
+      return err;
+    });
+  return api;
+};
+
+// JobDone
+export const doneJob = (jobId) => {
+  const api = axios
+    .post(`${API_HOST}/jobs/finish`, jobId, {
+      headers: { Authorization: `${localStorage.getItem("token")}` },
+    })
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .then((err) => {
+      console.log(err);
+      return err;
+    });
+  return api;
+}

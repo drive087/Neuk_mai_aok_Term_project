@@ -128,17 +128,17 @@ const JobManagementPage = () => {
         </TabPanel>
         <TabPanel value={value} index={2}>
           {inprogress.map((job) => (
-            <JobCard job={job} />
+            <JobCard  _status={"Inprogress"} job={job} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={3}>
           {cancel.map((job) => (
-            <JobCard job={job} />
+            <JobCard _status={"Cancel"} job={job} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={4}>
           {myJob.map((job) => (
-            <JobCard job={job} />
+            <JobCard job={job} isMyJob={true}/>
           ))}
         </TabPanel>
       </SwipeableViews>
