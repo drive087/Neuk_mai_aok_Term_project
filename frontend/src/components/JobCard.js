@@ -121,7 +121,9 @@ const JobCard = ({ job, _status, isMyJob }) => {
   };
 
   const handleApprove = (userID) => {
-    approvePeople({ jobId: jobID, userId: userID });
+    approvePeople({ jobId: jobID, userId: userID })
+      .then((res) => alert("Approve Done"))
+      .catch((err) => alert("Something went wrong"));
   };
   const handleEdit = () => {};
   const handleDelete = () => {
