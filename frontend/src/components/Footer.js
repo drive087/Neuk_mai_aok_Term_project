@@ -8,7 +8,7 @@ import '../pages/style.css';
 function Footer(props) {
     
     return (
-        <div style={{position:'absolute',bottom:'0', paddingTop:'5%'}}>
+        <div style={{paddingTop:'23%'}}>
         <Paper square elevation={0} fullWidth style={{ backgroundColor: '#191e25', marginTop:'48px' }}>
             <Grid container style={{ width: 'auto'}} id='FooterGrid'>
                 <Grid container id="FooterGrid1" item xs={12} sm={12} md={6}>

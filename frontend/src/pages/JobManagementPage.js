@@ -53,6 +53,8 @@ const JobManagementPage = () => {
   const [myJob, setMyJob] = useState([]);
   const [doneJob, setDoneJob] = useState([])
   const [value, setValue] = useState(0);
+  const [timer, setTimer] = React.useState(null)
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -60,8 +62,16 @@ const JobManagementPage = () => {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
+
+  function updatePosition(){
+    fetchData()
+    clearTimeout(timer)
+    setTimer(setTimeout(updatePosition, 200))
+  }
+
   useEffect(() => {
-    fetchData();
+    updatePosition();
   }, []);
   const fetchData = () => {
     getmyJobs()

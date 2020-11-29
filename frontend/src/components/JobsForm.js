@@ -12,12 +12,19 @@ import { getAllJob } from "../actions/action";
 
 const JobsForm = () => {
   const [jobs, setJobs] = useState(null);
+  const [timer, setTimer] = React.useState(null)
 
-  useEffect(() => {
+  function updatePosition(){
     getAllJob().then((data) => {
       console.log(data)
       setJobs(data)
     });
+    clearTimeout(timer)
+    setTimer(setTimeout(updatePosition, 200))
+  }
+
+  useEffect(() => {
+    updatePosition()
   }, []);
 
   const renderList = () => {

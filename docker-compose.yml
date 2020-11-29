@@ -1,16 +1,19 @@
 version: '3'
 services:
   server1:
+    restart: unless-stopped
     build:
       context: ./backend
     container_name: node-server1
 
   server2:
+    restart: unless-stopped
     build:
       context: ./backend
     container_name: node-server2
 
   server3:
+    restart: unless-stopped
     build:
       context: ./backend
     container_name: node-server3
